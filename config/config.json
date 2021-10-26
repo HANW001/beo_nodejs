@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "hexacon",
-    "password": "hexacon01",
-    "database": "punch",
+    "username": "root",
+    "password": "root",
+    "database": "beo",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
