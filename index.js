@@ -78,7 +78,8 @@ passport.deserializeUser(function (obj, done) {
 
 app.get('/oauth', passport.authenticate('kakao'), function (req, res) {
     // 로그인 시작시 state 값을 받을 수 있음
-    res.send(`id : ${req.user.profile.id} / accessToken : ${req.user.accessToken} / nickname : ${req.user.profile.properties.nickname} `)
+    // res.send(`id : ${req.user.profile.id} / accessToken : ${req.user.accessToken} / nickname : ${req.user.profile.properties.nickname} `)
+    res.send(`nickname : ${req.user.profile.properties.nickname}`)
 })
 
 
