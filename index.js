@@ -58,7 +58,7 @@ passport.use(new KakaoStrategy({
         console.log(`사용자 profile: ${JSON.stringify(profile._json)}`)
         let user = {
             profile: profile._json,
-            accessToken: accessToken
+            accessToken: accessToken,
         }
         return done(null, user)
         // return done('true', user)
@@ -67,6 +67,8 @@ passport.use(new KakaoStrategy({
 
 passport.serializeUser(function (user, done) {
     console.log(`user : ${user.profile.id}`)
+    console.log(`properties : ${user.profile.connected_at}`)
+    console.log(`properties : ${user.profile.properties.nickname}`)
     done(null, user)
 })
 passport.deserializeUser(function (obj, done) {
@@ -76,7 +78,7 @@ passport.deserializeUser(function (obj, done) {
 
 app.get('/oauth', passport.authenticate('kakao'), function (req, res) {
     // 로그인 시작시 state 값을 받을 수 있음
-    res.send(`id : ${req.user.profile.id} / accessToken : ${req.user.accessToken} `)
+    res.send(`id : ${req.user.profile.id} / accessToken : ${req.user.accessToken} / nickname : ${req.user.profile.properties.nickname} `)
 })
 
 
