@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html  >
+
+<head>
+
+    <title></title>
+
+</head>
+
+<body>
+<h1>회원 검색</h1>
+<table  border="1" >
+<tr>
+<td><a href="/list">회원목록</a> <!-- 자료 입력으로 이동 ()--></td>
+<td><a href="/insert">회원생성</a> <!-- 자료 입력으로 이동 ()--></td>
+</tr>
+</table>
+
+<form action='/gift/test3' method="get" >
+<fieldset>
+<table>
+<tr>
+    <td><label>회원ID</label></td>
+    <td><input type="text" name="id"  /></td>
+</tr>
+
+</table>
+<input type="submit" value="검색" />
+<table width="100%" border="1">
+<tr>
+<th>edit</th>
+<th>delete</th>
+<th>회원ID</th>
+<th>회원비밀번호</th>
+<th>회원 이름</th>
+<th>회원 Email</th>
+<th>회원 phone</th>
+
+</tr>
+<% if(locals.data){ %>
+<% data.forEach(function(item,index){ %>  <!-- 스크립트 언어-->
+<tr>
+<td><a href="/edit/<%=item.client_id %>">edit</a></td>
+<td><a href="/delete/<%=item.client_id %>">delete</a></td>
+<td><%= item.id %></td>  <!-- 값 추출-->
+<td><%= item.password %></td>
+<td><%= item.client_name %></td>
+<td><%= item.client_email %></td>
+<td><%= item.client_phone %></td>
+
+</tr>
+<%}); %>
+<% } %>
+</table>
+</fieldset>
+</form>
+
+
+</body>
+
+</html>
+
