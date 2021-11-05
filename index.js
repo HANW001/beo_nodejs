@@ -9,6 +9,7 @@ const router = require("./routes/user"); //라우터 모듈 등록 (라우터 �
 const giftRouter = require("./routes/gift"); 
 const fs = require('fs');
 const ejs = require('ejs');
+const bodyParser=require('body-parser')
 
 const passport = require('passport')
 const KakaoStrategy = require('passport-kakao').Strategy
@@ -17,13 +18,14 @@ let sequelize = require('./models/index').sequelize;
 let app = express();
 
 const mainPage = fs.readFileSync('views/pages/admin.ejs', 'utf8');
+
+app.use(express.json())
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
  
-app.get('/', (req, res) => {
-    var page = ejs.render(mainPage, {
-        title: "Temporary Title",
-    });
-    res.send(page);
-});
+
 sequelize.sync();
 
 app.use(cors({
@@ -94,6 +96,10 @@ app.get('/oauth', passport.authenticate('kakao'), function (req, res) {
     res.json({login: true, nickname:req.user.profile.properties.nickname, img:req.user.profile.properties.profile_image})
 })
 
-
-
+app.get('/', (req, res) => {
+    var page = ejs.render(mainPage, {
+        title: "Temporary Title",
+    });
+    res.send(page);
+});
 
