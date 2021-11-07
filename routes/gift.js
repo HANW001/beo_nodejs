@@ -15,6 +15,7 @@ var connection = mysql.createConnection({
     user: 'root',
     password:'root',
     database: 'beo',
+    multipleStatements: true
 });
 
 router.get('/test', (req, res) => {
@@ -88,28 +89,93 @@ router.get('/test2', (req, res) => {
 // const sql2 = 'SELECT  C.Purpose FROM  beo.purposes as C'
 // const where = ' where B.RelationName=?'
 // const where2 = ' where C.PurposeName=?'
+//D.ProductID,D.ProductName,D.Price,D.ProductDesc,D.Reason,D.Gender, E.Nature
 
-const sql = ' SELECT A.FromPrice,A.ToPrice, B.Relation, C.Purpose FROM beo.prices as A, beo.relations as B, beo.purposes as C'
-const where = ' where A.PriceRange=? and B.RelationName=? and C.PurposeName=?'
-
+const tmp = 'drop TEMPORARY TABLE if exists tmp;'
+const tmp2 = ' CREATE TEMPORARY TABLE tmp'
+const sql = ' select A.PriceRange, B.RelationName, C.PurposeName, D.ProductID,D.ProductName,D.Price,D.ProductDesc,D.Reason,D.Gender, E.Nature FROM beo.prices as A , (beo.relations as B INNER JOIN beo.prdtrelation as BP ON B.Relation=BP.Relation)  inner JOIN (beo.purposes as C INNER JOIN beo.prdtpurpose as CP ON C.Purpose=CP.Purpose) ON BP.ProductID=CP.ProductID INNER JOIN beo.products as D on BP.ProductID = D.ProductID and D.Gender = ?  inner join beo.prdtnature as e on D.ProductID = e.ProductID'
+const where = ' WHERE A.PriceRange=? and B.RelationName=?AND  C.PurposeName=? and D.Price between A.FromPrice and A.ToPrice order by E.nature; '
+const sqlinter = ' select F.InterestName,tmp.* from (beo.interest as F INNER JOIN beo.prdtinterest as FP ON F.interest=FP.interest) inner join tmp on FP.ProductID = tmp.ProductID'
+const whereinter =' where F.InterestName = ?;'
+const sqlall = 'select F.InterestName,G.ages,tmp.* from (beo.interest as F INNER JOIN beo.prdtinterest as FP ON F.interest=FP.interest) inner join (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) on FP.ProductID = GP.ProductID inner join  tmp on FP.ProductID = tmp.ProductID'
+const whereall =' where F.InterestName = ? and G.AgeName=?;'
+const sqlage = ' select G.ages,tmp.* from (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) inner join tmp on GP.ProductID = tmp.ProductID'
+const whereage =' where G.AgeName = ?;'
 router.post('/test3', (req, res) => {
+    let Gender = req.body.Gender=='남자'? '1':'2';
     let PriceRange = req.body.PriceRange;
     let RelationName = req.body.RelationName;
     let PurposeName = req.body.PurposeName;
-    // let RelationName = req.body.RelationName;
-    connection.query(sql+where,[PriceRange,RelationName,PurposeName], function(error,results){
-        // connection.query(sql, function(error,results){
-        if (error){
-            console.log(error);
-        }
-        // var page = ejs.render(listPage, {
-        //     title: "Temporary Title",
-        //     data: results
-        // });
-        // console.log(data)
-        // res.send(page)
-        res.json(results)
-    });
+    let InterestName = req.body.InterestName;
+    let AgeName = req.body.AgeName;
+    if (InterestName !='' && AgeName=='') {
+        connection.query(tmp+tmp2+sql+where+sqlinter+whereinter,[Gender ,PriceRange,RelationName,PurposeName,InterestName], function(error,results){
+            console.log(results[results.length-1])
+            if (error){
+                console.log(error);
+            } else{
+                var page = ejs.render(listPage, {
+                    title: "Temporary Title",
+                    data: results[results.length-1]
+                });
+                
+                res.send(page)
+            }
+           
+            // res.json(results)
+        });
+    }else if (InterestName !='' && AgeName!='') {
+        connection.query(tmp+tmp2+sql+where+sqlall+whereall,[Gender ,PriceRange,RelationName,PurposeName,InterestName,AgeName], function(error,results){
+            console.log(results[results.length-1])
+            if (error){
+                console.log(error);
+            } else{
+                var page = ejs.render(listPage, {
+                    title: "Temporary Title",
+                    data: results[results.length-1]
+                });
+                
+                res.send(page)
+            }
+           
+            // res.json(results)
+        });
+    } else if (InterestName =='' && AgeName!='') {
+        connection.query(tmp+tmp2+sql+where+sqlage+whereage,[Gender ,PriceRange,RelationName,PurposeName,AgeName], function(error,results){
+            console.log(results)
+            if (error){
+                console.log(error);
+            } else{
+                var page = ejs.render(listPage, {
+                    title: "Temporary Title",
+                    data: results[results.length-1]
+                });
+                
+                res.send(page)
+            }
+           
+            // res.json(results)
+        });
+    } else if( InterestName =='' && AgeName ==''){
+        connection.query(sql+where,[Gender ,PriceRange,RelationName,PurposeName], function(error,results){
+            console.log(results)
+            if (error){
+                console.log(error);
+            } else{
+                var page = ejs.render(listPage, {
+                    title: "Temporary Title",
+                    data: results
+                });
+                
+                res.send(page)
+            }
+           
+            // res.json(results)
+        });
+    }
+
+    
+    
 })
 
 

@@ -21,33 +21,56 @@
 <fieldset>
 <table>
 <tr>
-    <td><label>회원ID</label></td>
-    <td><input type="text" name="id"  /></td>
+    <td><label>성별(Gender)</label></td>
+    <td><input type="text" name="Gender"  /></td>
+    <td><label>PriceRange</label></td>
+    <td><input type="text" name="PriceRange"  /></td>
+    <td><label>관계(RelationName)</label></td>
+    <td><input type="text" name="RelationName"  /></td>
+    <td><label>선물상황(PurposeName)</label></td>
+    <td><input type="text" name="PurposeName"  /></td>
+    <td><label>관심사(InterestName)</label></td>
+    <td><input type="text" name="InterestName"  /></td>
+    <td><label>나이대(AgeName)</label></td>
+    <td><input type="text" name="AgeName"  /></td>
+
 </tr>
 
 </table>
 <input type="submit" value="검색" />
 <table width="100%" border="1">
 <tr>
-<th>edit</th>
-<th>delete</th>
-<th>회원ID</th>
-<th>회원비밀번호</th>
-<th>회원 이름</th>
-<th>회원 Email</th>
-<th>회원 phone</th>
+<!-- <th>edit</th>
+<th>delete</th> -->
+<th>ProductID</th>
+<th>ProductName</th>
+<th>Price</th>
+<th>PriceRange</th>
+<th>관계(RelationName)</th>
+<th>선물상황(PurposeName)</th>
+<th>성별(Gender)</th>
+<th>상품성격(Nature)</th>
+<th>관심사(InterestName)</th>
+<th>나이대(AgeName)</th>
+<th>Reason</th>
 
 </tr>
 <% if(locals.data){ %>
 <% data.forEach(function(item,index){ %>  <!-- 스크립트 언어-->
 <tr>
-<td><a href="/edit/<%=item.client_id %>">edit</a></td>
-<td><a href="/delete/<%=item.client_id %>">delete</a></td>
-<td><%= item.id %></td>  <!-- 값 추출-->
-<td><%= item.password %></td>
-<td><%= item.client_name %></td>
-<td><%= item.client_email %></td>
-<td><%= item.client_phone %></td>
+<!-- <td><a href="/edit/<%=item.client_id %>">edit</a></td>
+<td><a href="/delete/<%=item.client_id %>">delete</a></td> -->
+<td><%= item.ProductID %></td>  <!-- 값 추출-->
+<td><%= item.ProductName %></td>
+<td><%= item.Price %></td>
+<td><%= item.PriceRange %></td>
+<td><%= item.RelationName %></td>
+<td><%= item.PurposeName %></td>
+<td><%= item.Gender %></td>
+<td><%= item.Nature %></td>
+<td><%= item.InterestName %></td>
+<td><%= item.ages %></td>
+<td><%= item.Reason %></td>
 
 </tr>
 <%}); %>
