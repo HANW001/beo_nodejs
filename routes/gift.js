@@ -102,6 +102,7 @@ const whereinter =' where F.InterestName = ?;'
 
 const sqlall = 'select F.InterestName,G.ages,tmp3.* from (beo.interest as F INNER JOIN beo.prdtinterest as FP ON F.interest=FP.interest) inner join (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) on FP.ProductID = GP.ProductID inner join  tmp3 on FP.ProductID = tmp3.ProductID'
 const whereall =' where F.InterestName = ? and G.AgeName=?;'
+
 const sqlage = ' select G.ages,tmp3.* from (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) inner join tmp3 on GP.ProductID = tmp3.ProductID'
 const whereage =' where G.AgeName = ?;'
 
