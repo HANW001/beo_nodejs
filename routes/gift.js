@@ -10,6 +10,7 @@ const mainPage = fs.readFileSync('views/pages/admin.ejs', 'utf8');
 const listPage = fs.readFileSync('views/pages/list.ejs', 'utf8');
 
 var mysql = require('mysql');
+const { resourceLimits } = require('worker_threads');
 var connection = mysql.createConnection({
     host:'127.0.0.1',
     user: 'root',
@@ -91,26 +92,45 @@ router.get('/test2', (req, res) => {
 // const where2 = ' where C.PurposeName=?'
 //D.ProductID,D.ProductName,D.Price,D.ProductDesc,D.Reason,D.Gender, E.Nature
 
-const tmp = 'drop TEMPORARY TABLE if exists tmp;'
-const tmp2 = ' CREATE TEMPORARY TABLE tmp'
+const tmp = 'drop TABLE if exists tmp;'
+const tmp2 = ' CREATE TABLE tmp'
+
 const sql = ' select A.PriceRange, B.RelationName, C.PurposeName, D.ProductID,D.ProductName,D.Price,D.ProductDesc,D.Reason,D.Gender, E.Nature FROM beo.prices as A , (beo.relations as B INNER JOIN beo.prdtrelation as BP ON B.Relation=BP.Relation)  inner JOIN (beo.purposes as C INNER JOIN beo.prdtpurpose as CP ON C.Purpose=CP.Purpose) ON BP.ProductID=CP.ProductID INNER JOIN beo.products as D on BP.ProductID = D.ProductID and D.Gender = ?  inner join beo.prdtnature as e on D.ProductID = e.ProductID'
-const where = ' WHERE A.PriceRange=? and B.RelationName=?AND  C.PurposeName=? and D.Price between A.FromPrice and A.ToPrice order by E.nature; '
-const sqlinter = ' select F.InterestName,tmp.* from (beo.interest as F INNER JOIN beo.prdtinterest as FP ON F.interest=FP.interest) inner join tmp on FP.ProductID = tmp.ProductID'
+const where = ' WHERE A.PriceRange=? and B.RelationName=?AND  C.PurposeName=? and D.Price between A.FromPrice and A.ToPrice order by E.nature asc,D.Price asc ; '
+const sqlinter = ' select F.InterestName,tmp3.* from (beo.interest as F INNER JOIN beo.prdtinterest as FP ON F.interest=FP.interest) inner join tmp3 on FP.ProductID = tmp3.ProductID'
 const whereinter =' where F.InterestName = ?;'
-const sqlall = 'select F.InterestName,G.ages,tmp.* from (beo.interest as F INNER JOIN beo.prdtinterest as FP ON F.interest=FP.interest) inner join (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) on FP.ProductID = GP.ProductID inner join  tmp on FP.ProductID = tmp.ProductID'
+
+const sqlall = 'select F.InterestName,G.ages,tmp3.* from (beo.interest as F INNER JOIN beo.prdtinterest as FP ON F.interest=FP.interest) inner join (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) on FP.ProductID = GP.ProductID inner join  tmp3 on FP.ProductID = tmp3.ProductID'
 const whereall =' where F.InterestName = ? and G.AgeName=?;'
-const sqlage = ' select G.ages,tmp.* from (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) inner join tmp on GP.ProductID = tmp.ProductID'
+const sqlage = ' select G.ages,tmp3.* from (beo.ages as G INNER JOIN beo.prdtage as GP ON G.ages=GP.ages) inner join tmp3 on GP.ProductID = tmp3.ProductID'
 const whereage =' where G.AgeName = ?;'
+
+const tmp3 = ' drop TABLE if exists tmp2;'
+const tmp4 = ' CREATE TABLE tmp2'
+const sqlseason = ' SELECT HP.ProductID FROM (beo.seasons as H INNER JOIN beo.prdtseason as HP ON H.Season=HP.Season )'
+const whereseason=' WHERE H.Season=11 and HP.ProductID NOT IN (SELECT DISTINCT tmp.productID FROM tmp);'
+
+const tmp5 = ' drop TABLE if exists tmp3;'
+const tmp6 = ' CREATE TABLE tmp3'
+const sqltmp = ' SELECT * FROM tmp where tmp.ProductID  NOT IN (SELECT DISTINCT tmp2.ProductID FROM tmp2 WHERE tmp2.ProductID);'
+
 router.post('/test3', (req, res) => {
-    let Gender = req.body.Gender=='남자'? '1':'2';
+    let Gender = req.body.Gender;
     let PriceRange = req.body.PriceRange;
     let RelationName = req.body.RelationName;
     let PurposeName = req.body.PurposeName;
     let InterestName = req.body.InterestName;
     let AgeName = req.body.AgeName;
+    
+    if (Gender=='남자') {
+        Gender='0'
+    }else if(Gender=='여자'){
+        Gender= "1"
+    }else{Gender='2'}
+
     if (InterestName !='' && AgeName=='') {
-        connection.query(tmp+tmp2+sql+where+sqlinter+whereinter,[Gender ,PriceRange,RelationName,PurposeName,InterestName], function(error,results){
-            console.log(results[results.length-1])
+        connection.query(tmp+tmp2+sql+where+tmp3+tmp4+sqlseason+whereseason+tmp5+tmp6+sqltmp+sqlinter+whereinter,[Gender ,PriceRange,RelationName,PurposeName,InterestName], function(error,results){
+            console.log(results)
             if (error){
                 console.log(error);
             } else{
@@ -118,15 +138,13 @@ router.post('/test3', (req, res) => {
                     title: "Temporary Title",
                     data: results[results.length-1]
                 });
-                
                 res.send(page)
             }
-           
             // res.json(results)
         });
     }else if (InterestName !='' && AgeName!='') {
-        connection.query(tmp+tmp2+sql+where+sqlall+whereall,[Gender ,PriceRange,RelationName,PurposeName,InterestName,AgeName], function(error,results){
-            console.log(results[results.length-1])
+        connection.query(tmp+tmp2+sql+where+tmp3+tmp4+sqlseason+whereseason+tmp5+tmp6+sqltmp+sqlall+whereall,[Gender ,PriceRange,RelationName,PurposeName,InterestName,AgeName], function(error,results){
+            console.log(results)
             if (error){
                 console.log(error);
             } else{
@@ -134,14 +152,12 @@ router.post('/test3', (req, res) => {
                     title: "Temporary Title",
                     data: results[results.length-1]
                 });
-                
                 res.send(page)
             }
-           
             // res.json(results)
         });
     } else if (InterestName =='' && AgeName!='') {
-        connection.query(tmp+tmp2+sql+where+sqlage+whereage,[Gender ,PriceRange,RelationName,PurposeName,AgeName], function(error,results){
+        connection.query(tmp+tmp2+sql+where+tmp3+tmp4+sqlseason+whereseason+tmp5+tmp6+sqltmp+sqlage+whereage,[Gender ,PriceRange,RelationName,PurposeName,AgeName], function(error,results){
             console.log(results)
             if (error){
                 console.log(error);
@@ -150,35 +166,25 @@ router.post('/test3', (req, res) => {
                     title: "Temporary Title",
                     data: results[results.length-1]
                 });
-                
                 res.send(page)
             }
-           
             // res.json(results)
         });
     } else if( InterestName =='' && AgeName ==''){
-        connection.query(sql+where,[Gender ,PriceRange,RelationName,PurposeName], function(error,results){
+        connection.query(sql+where+tmp3+tmp4+sqlseason+whereseason+tmp5+tmp6+sqltmp,[Gender ,PriceRange,RelationName,PurposeName], function(error,results){
             console.log(results)
             if (error){
                 console.log(error);
             } else{
                 var page = ejs.render(listPage, {
                     title: "Temporary Title",
-                    data: results
+                    data: results[0]
                 });
-                
                 res.send(page)
             }
-           
             // res.json(results)
         });
     }
-
-    
-    
 })
-
-
-
 
 module.exports = router;
