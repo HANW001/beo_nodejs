@@ -20,22 +20,40 @@ var connection = mysql.createConnection({
 });
 
 router.get('/test', (req, res) => {
-    users.findAll({
-        attributes: [ 'id', 'password']
-    })
-    .then(result => {
-        // res.json({"data":result, test: "test", error: null})
-        var page = ejs.render(mainPage, {
-            title: "Temporary Title",
-            data:result
-        });
-        res.send(page)
-        // res.json(result)
-    })
-    .catch(err => {
-        console.error(err);
-        res.json({error: null}
-    )});
+    connection.query('select * from prices', function(error,results){
+        console.log(results)
+        if (error){
+            console.log(error);
+        } else{
+            
+            res.send(results)
+            console.log(results)
+        }
+        // res.json(results)
+    });
+})
+
+router.post('/tests', (req, res) => {
+
+    let PriceRange = req.body.PriceRange;
+    let ToPrice = req.body.ToPrice;
+    let FromPrice = req.body.FromPrice;
+    console.log(PriceRange)
+    console.log(ToPrice)
+    console.log(FromPrice)
+  
+
+    connection.query('insert into prices values(?,?,?)',[PriceRange, ToPrice, FromPrice], function(error,results){
+        console.log(results)
+        if (error){
+            console.log(error);
+        } else{
+            
+            res.send(results)
+            console.log(results)
+        }
+        // res.json(results)
+    });
 })
 
 router.get('/test2', (req, res) => {
