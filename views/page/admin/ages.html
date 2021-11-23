@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Html CRUD with Pure JavaScript
+    </title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+</head>
+
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+
+    <td>
+        <table class="list">
+            <thead>
+                <tr>
+                    <th>Ages</th>
+                    <th>AgeName</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>Ages*</label>
+            <input type="text" name="Ages" id="AgesForm">
+        </div>
+        <div>
+            <label>AgeName</label>
+            <input type="text" name="AgeName" id="AgeNameForm">
+        </div>
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+
+        $("#userInfo").empty();
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/ages", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    const userInfo = document.getElementById("userInfo");
+                    var tr_obj = document.createElement("tr");
+                    const Ages = document.createElement("td");
+                    const AgeName = document.createElement("td");
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    tr_obj.appendChild(Ages);
+                    tr_obj.appendChild(AgeName);
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+                    Ages.textContent = data[i].Ages;
+                    AgeName.textContent = data[i].AgeName;
+                    // Edit.onclick = 'editUser()';
+
+                    var params = "ages=" + data[i].Ages + ",ageName=" + data[i].AgeName;
+
+                    Edit.innerHTML = `<a onClick="editUser('ages', '` + params + `', '` + data[i].Ages +`' )">Edit</a>`;
+                    Delete.innerHTML = `<a onClick="deleteUser('ages', '` + data[i].Ages + `' )">Delete</a>`;
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "Ages": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/ages", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if(data.sqlMessage){
+                    alert('상위 테이블을 삭제하세요. \n'+data.sqlMessage);
+                }else{
+                    alert("delete succeseed!");
+                }
+     
+               
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var Ages = document.getElementById("AgesForm").value;
+        var AgeName = document.getElementById("AgeNameForm").value;
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ "Ages": Ages, "AgeName": AgeName }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/ages", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("AgesForm").value = "";
+        document.getElementById("AgeNameForm").value = "";
+    }
+
+    function fnGoInsert(tableName, params, rowId) {
+        window.location.href = "age_edit.html?tableName="+tableName+"&params="+params+"&rowId=" + rowId;
+    }
+</script>
+</html>

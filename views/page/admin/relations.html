@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Html CRUD with Pure JavaScript
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+    <button onclick="newUser()">new</button>
+
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <th>Relation</th>
+                    <th>RelationName</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>Relation*</label>
+            <input type="text" name="Relation" id="RelationForm">
+        </div>
+        <div>
+            <label>RelationName</label>
+            <input type="text" name="RelationName" id="RelationNameForm">
+        </div>
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+        $("#userInfo").empty();
+
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/relations", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    var tr_obj = document.createElement("tr");
+                    const Relation = document.createElement("td");
+                    const RelationName = document.createElement("td");
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    Edit.id=i;
+                    Relation.textContent = data[i].Relation;
+                    RelationName.textContent = data[i].RelationName;
+                    // Edit.onclick = 'editUser()';
+                    Edit.innerHTML = `<a onClick="editUser(this.id)">Edit</a>`;
+
+                    Delete.innerHTML = `<a onClick="deleteUser()">Delete</a>`;
+
+                    const userInfo = document.getElementById("userInfo");
+                    tr_obj.appendChild(Relation);
+                    tr_obj.appendChild(RelationName);
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "Ages": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/ages", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if(data.sqlMessage){
+                    alert('상위 테이블을 삭제하세요. \n'+data.sqlMessage);
+                }else{
+                    alert("delete succeseed!");
+                }
+     
+               
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var Relation = document.getElementById("RelationForm").value;
+        var RelationName = document.getElementById("RelationNameForm").value;
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ "Relation": Relation, "RelationName": RelationName }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/relations", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("RelationForm").value = "";
+        document.getElementById("RelationNameForm").value = "";
+    }
+
+    function fnGoInsert(clicked_id) {
+
+
+      alert(clicked_id);
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+   <title>Responsive HTML images demo</title>
+   <style>
+      @font-face {
+         font-family: Spoqa;
+         src: url("fonts/SpoqaHanSansNeo-Regular.otf") format('OpenType');
+      }
+
+      @font-face {
+         font-family: Pretendard;
+         src: url("fonts/Pretendard-Regular.otf") format('OpenType');
+      }
+
+      html {
+         font-family: sans-serif;
+         background-color: #E5E5E5;
+      }
+
+      body {
+         max-width: 600px;
+         margin: 0 auto;
+         background-color: white;
+      }
+
+
+      p {
+         line-height: 1.5;
+      }
+
+      .hide {
+         display: none;
+      }
+
+      .beo-main-title1 {
+         font-Size: 25px;
+         font-family: Pretendard;
+      }
+
+      .beo-main-title2 {
+         font-Size: 16px;
+         font-weight: bold;
+         font-family: Pretendard;
+      }
+
+      .beo-main-contents1 {
+         font-Size: 14px;
+         color: #666666;
+         font-family: Pretendard;
+      }
+
+      .beo-main-contents2 {
+         font-Size: 14px;
+         color: #000000;
+         font-weight: bold;
+         font-family: Pretendard;
+      }
+
+      .beo-header-container {
+         display: grid;
+         grid-template-columns: repeat(2, 0fr);
+         justify-content: space-between;
+         padding: 20px;
+      }
+
+      .beo-section-container {
+         padding: 20px;
+      }
+
+      .beo-main-text-container {
+         padding: 15px 0px 0px 0px;
+      }
+
+      .beo-main-text-container2 {
+         padding: 8px 0px 0px 20px;
+      }
+
+      .beo-main-text-container3 {
+         display: flex;
+         justify-content: flex-end;
+         padding: 20px;
+      }
+
+      .beo-main-profile-container {
+         background-color: #FFFAF8;
+      }
+
+      .beo-main-slider-container {
+         position: relative;
+         width: 100%;
+         height: 100%;
+
+
+      }
+
+      .beo-main-comment-container {
+         position: relative;
+         width: 100%;
+         height: 100%;
+      }
+
+      .comment-num {
+         padding-top: 20px;
+         padding-left: 20px;
+
+         font-family: Pretendard;
+         font-weight: 300;
+         font-size: 18px;
+         line-height: 22px;
+
+         color: #000000;
+      }
+
+      .comment-numbering {
+         padding-top: 6px;
+         padding-left: 20px;
+
+         font-family: Pretendard;
+         font-size: 15px;
+
+
+         color: #000000;
+      }
+
+      .comment-title {
+         padding: 16px 20px 16px 20px;
+
+         font-family: Pretendard;
+
+         font-weight: 600;
+         font-size: 18px;
+
+         color: #000000;
+
+      }
+
+      .comment-divider {
+         padding-top: 2px;
+         /* padding-left: 20px; */
+         text-align: right;
+         width: 90%;
+         /* height: 1px; */
+
+         /* System Black 100 */
+
+         background: #000000;
+      }
+
+      .beo-main-reason-container {
+         position: relative;
+         width: 100%;
+         height: 100%;
+      }
+
+      .comment-reason {
+         padding-top: 16px;
+         padding-left: 20px;
+
+         font-family: Pretendard;
+         font-size: 14px;
+
+
+         color: #666666;
+      }
+
+      .comment-reasons {
+         padding: 8px 20px 20px 20px;
+
+
+         font-family: Pretendard;
+
+         font-size: 14px;
+
+
+         color: #000000;
+      }
+
+      .comment-divider2 {
+         padding-top: 2px;
+         text-align: right;
+         width: 90%;
+
+         background: rgba(0, 0, 0, 0.2);
+      }
+
+      .beo-main-price-container {
+         position: relative;
+         width: 100%;
+         height: 100%;
+      }
+
+      .comment-price {
+         padding-top: 16px;
+         padding-left: 20px;
+         padding-right: 204px;
+         font-family: Pretendard;
+         font-size: 14px;
+
+         color: #666666;
+      }
+
+      .comment-price2 {
+         position: absolute;
+         /* bottom: 115px; */
+         right: 40px;
+         text-align: right;
+         /* padding-top: 16px; */
+
+         font-family: Pretendard;
+
+         font-size: 14px;
+         color: #000000;
+      }
+
+      .beo-main-product-container {
+         position: relative;
+         width: 100%;
+         height: 100%;
+      }
+
+      .comment-product {
+         padding-top: 10px;
+         padding-left: 20px;
+
+         font-family: Pretendard;
+         font-size: 14px;
+
+
+         color: #666666;
+      }
+
+      .comment-products {
+         padding: 8px 20px 30px 20px;
+
+         font-family: Pretendard;
+
+         font-size: 14px;
+
+         color: #666666;
+      }
+
+      .beo-main-button-container {
+         position: relative;
+         /* width: 100%; */
+         margin: 0px;
+         padding: 0px;
+         height: 56px;
+
+      }
+
+      .button-shared {
+         position: absolute;
+
+         left: 22px;
+         /* padding-left: 20px; */
+
+      }
+
+      .button-heart {
+         position: absolute;
+         left: 77px;
+      }
+
+      .button-buy {
+         position: absolute;
+         left: 132px;
+      }
+
+      .button-text {
+         position: absolute;
+         /* width: 100%; */
+         z-index: 2;
+         top: 19px;
+         left: 56%;
+         /* right: 206px; */
+         /* text-align: center; */
+         font-family: Pretendard;
+
+         font-weight: 600;
+         font-size: 16px;
+         line-height: 19px;
+
+         /* System White */
+
+         color: #FFFFFF;
+      }
+
+      .beo-main-more-container {
+         position: relative;
+
+         margin: 0px;
+         padding: 0px;
+         height: 90px;
+
+      }
+
+      .comment-divider3 {
+         padding-top: 2px;
+         text-align: right;
+         width: 100%;
+         height: 10px;
+         left: 0px;
+
+         /* System Gray 01 */
+
+         background-color: #F3F3F3;
+
+      }
+
+      .beo-main-link-container {
+         position: relative;
+
+         height: 115px;
+         background-color: #FFFFFF;
+      }
+
+      .link-text1 {
+         padding-top: 34px;
+         padding-left: 40px;
+
+         font-family: Pretendard;
+
+         font-size: 13px;
+
+         /* identical to box height */
+
+
+         color: #444444;
+      }
+
+      .link-text2 {
+         padding-top: 2px;
+         padding-left: 40px;
+         font-family: Pretendard;
+
+         font-weight: bold;
+         font-size: 18px;
+         line-height: 22px;
+         /* identical to box height */
+
+
+         color: #000000;
+      }
+
+      .link-img {
+         position: absolute;
+         top: 50px;
+         right: 40px;
+      }
+
+      .link-icon1 {
+         padding-top: 14px;
+         padding-left: 40px;
+      }
+
+      .link-icon2 {
+         padding-top: 14px;
+         padding-left: 6px;
+      }
+
+      .comment-divider4 {
+         padding-top: 2px;
+         text-align: right;
+         width: 100%;
+         height: 10px;
+         left: 0px;
+
+         /* System Gray 01 */
+
+         background-color: #F3F3F3;
+
+      }
+
+      .beo-main-gift-container {
+         position: relative;
+         text-align: center;
+         width: 100%;
+         height: 400px;
+         background-color: #FFFFFF;
+      }
+
+      .gift-title {
+         position: absolute;
+         top: 40px;
+         width: 100%;
+         font-family: Pretendard;
+         font-style: normal;
+         font-weight: bold;
+         font-size: 26px;
+         line-height: 31px;
+
+         /* System Black 100 */
+
+         color: #000000;
+      }
+
+      .gift-title2 {
+         position: absolute;
+         top: 85px;
+         width: 100%;
+         font-family: Pretendard;
+
+         font-size: 15px;
+
+
+         color: #000000;
+      }
+
+      .gift-img1 {
+         position: absolute;
+         top: 135px;
+         width: 100%;
+      }
+
+      .gift-img2 {
+         position: absolute;
+         top: 256px;
+         width: 100%;
+      }
+
+
+      .slideshow-container {
+         position: relative;
+         animation: slide 1s infinite;
+         width: 100%;
+         height: 100vw;
+         max-height: 632px;
+         overflow: hidden;
+      }
+
+      .beo-main-footer-container {
+         position: relative;
+         width: 100%;
+         height: 275px;
+         background-color: #F3F3F3;
+      }
+
+      .footer-text01 {
+         padding-left: 20px;
+         padding-top: 25px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #666666;
+      }
+
+      .footer-text02 {
+         padding-left: 20px;
+         padding-top: 20px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .footer-img {
+         padding-left: 20px;
+         padding-top: 25px;
+      }
+
+      .footer-text03 {
+         padding-left: 20px;
+         padding-top: 16px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .footer-text04 {
+         padding-left: 40px;
+         padding-top: 55px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #666666;
+      }
+
+      .footer-text05 {
+         padding-left: 20px;
+         padding-top: 6px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .footer-text06 {
+         padding-left: 47px;
+         padding-top: 6px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .footer-text07 {
+         padding-left: 20px;
+         padding-top: 6px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .footer-text08 {
+         padding-left: 47px;
+         padding-top: 6px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .footer-text-1 {
+         padding-left: 9px;
+         padding-top: 97px;
+         font-family: Pretendard;
+
+         font-weight: 600;
+         font-size: 10px;
+
+
+
+         /* System Gray 02 */
+
+         color: #888888;
+      }
+
+      .footer-text09 {
+         padding-left: 20px;
+         padding-top: 6px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .footer-text10 {
+         padding-left: 82px;
+         padding-top: 6px;
+
+         font-family: Pretendard;
+
+         font-size: 10px;
+
+
+         color: #888888;
+      }
+
+      .dotContainer {
+         position: absolute;
+         bottom: 30px;
+         height: auto;
+         width: 100%;
+         text-align: center;
+      }
+
+      .slideshow-container-image {
+         width: 100%;
+      }
+
+      .leftShow {
+         position: absolute;
+         width: 100%;
+         display: block;
+         animation-name: left;
+         animation-duration: 1s;
+         animation-iteration-count: 1;
+      }
+
+      .rightShow {
+         position: absolute;
+         width: 100%;
+         display: block;
+         animation-name: right;
+         animation-duration: 1s;
+         animation-iteration-count: 1;
+      }
+
+      @keyframes left {
+         0% {
+            left: 100%;
+         }
+
+         100% {
+            left: 0%;
+         }
+      }
+
+      @keyframes right {
+         0% {
+            left: -100%;
+         }
+
+         100% {
+            left: 0%;
+         }
+      }
+
+      /* The dots/bullets/indicators */
+      .dot {
+         cursor: pointer;
+         height: 5px;
+         width: 5px;
+         margin: 0 2px;
+         background-color: black;
+         border-radius: 50%;
+         display: inline-block;
+         transition: background-color 0.6s ease;
+      }
+
+      .active {
+         background-color: #FFFFFF;
+      }
+
+      .landing-main-fade-up-accordian {
+         position: relative;
+
+         width: 100%;
+         height: 288px;
+         margin: auto;
+
+      }
+
+      .landing-main-fade-up-title {
+         text-align: left;
+         font-family: Pretendard;
+         font-weight: bold;
+         font-size: 14px;
+      }
+
+      .landing-main-fade-up-title-Q {
+         font-family: Pretendard;
+         font-weight: bold;
+         font-size: 14px;
+
+         color: #ec5800;
+      }
+
+      .landing-main-fade-up-comment {
+         padding: 20px;
+         text-align: left;
+         font-family: Pretendard;
+
+         font-size: 14px;
+         line-height: 21px;
+      }
+
+      button.accordion {
+         background-color: #fff;
+         cursor: pointer;
+         width: 100%;
+         height: 60px;
+         /* text-align: center; */
+         border: none;
+         font-size: 16px;
+         transition: 0.5s;
+         /* text-align: left; */
+         padding: 10px;
+      }
+
+      button.accordion:after {
+         background-image: url("images/arrow_closed.png");
+         background-size: 18px 18px;
+
+         display: inline-block;
+         /* width: 18px; */
+         height: 18px;
+         content: "";
+         /* float: right; */
+         position: relative;
+         top: 18px;
+      }
+
+      button.accordion.active:after {
+         background-image: url("images/arrow_opened.png");
+         content: "";
+      }
+
+      div.panel {
+         margin: auto;
+         text-align: center;
+
+         width: 100%;
+         background-color: #fef7f2;
+         max-height: 0;
+         overflow: hidden;
+         transition: max-height 0.2s ease-out;
+         border-top: 1px solid #f0f0f0;
+         /* color:#666666; */
+      }
+
+      .fa {
+         font-size: 50px;
+         cursor: pointer;
+         user-select: none;
+      }
+
+      .fa:hover {
+         color: darkblue;
+      }
+
+      .avatar__image {
+         /* Rounded border */
+         border-radius: 50%;
+
+         /* Take full size */
+         width: 24px;
+         height: 24px;
+         float: left;
+      }
+
+      .avatar__image2 {
+         /* Rounded border */
+         border-radius: 50%;
+         padding: 10px;
+         /* Take full size */
+         width: 24px;
+         height: 24px;
+         float: left;
+      }
+
+      #snackbar {
+         visibility: hidden;
+         width: 214px;
+         margin-left: -125px;
+         background-color: rgba(0, 0, 0, 0.6);
+         color: #fff;
+         text-align: center;
+         border-radius: 8px;
+         padding: 8px 14px;
+         position: fixed;
+         z-index: 1;
+         left: 50%;
+         bottom: 30px;
+         font-size: 14px;
+      }
+
+      #snackbar.show {
+         visibility: visible;
+         -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+         animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      @-webkit-keyframes fadein {
+         from {
+            bottom: 0;
+            opacity: 0;
+         }
+
+         to {
+            bottom: 30px;
+            opacity: 1;
+         }
+      }
+
+      @keyframes fadein {
+         from {
+            bottom: 0;
+            opacity: 0;
+         }
+
+         to {
+            bottom: 30px;
+            opacity: 1;
+         }
+      }
+
+      @-webkit-keyframes fadeout {
+         from {
+            bottom: 30px;
+            opacity: 1;
+         }
+
+         to {
+            bottom: 0;
+            opacity: 0;
+         }
+      }
+
+      @keyframes fadeout {
+         from {
+            bottom: 30px;
+            opacity: 1;
+         }
+
+         to {
+            bottom: 0;
+            opacity: 0;
+         }
+      }
+
+      #snackbar2 {
+         visibility: hidden;
+         width: 234px;
+         margin-left: -125px;
+         background-color: rgba(0, 0, 0, 0.6);
+         color: #fff;
+         text-align: center;
+         border-radius: 8px;
+         padding: 8px 14px;
+         position: fixed;
+         z-index: 1;
+         left: 50%;
+         bottom: 30px;
+         font-size: 14px;
+      }
+
+      #snackbar2.show2 {
+         visibility: visible;
+         -webkit-animation: fadein2 0.5s, fadeout2 0.5s 2.5s;
+         animation: fadein2 0.5s, fadeout2 0.5s 2.5s;
+      }
+
+      @-webkit-keyframes fadein2 {
+         from {
+            bottom: 0;
+            opacity: 0;
+         }
+
+         to {
+            bottom: 30px;
+            opacity: 1;
+         }
+      }
+
+      @keyframes fadein2 {
+         from {
+            bottom: 0;
+            opacity: 0;
+         }
+
+         to {
+            bottom: 30px;
+            opacity: 1;
+         }
+      }
+
+      @-webkit-keyframes fadeout2 {
+         from {
+            bottom: 30px;
+            opacity: 1;
+         }
+
+         to {
+            bottom: 0;
+            opacity: 0;
+         }
+      }
+
+      @keyframes fadeout2 {
+         from {
+            bottom: 30px;
+            opacity: 1;
+         }
+
+         to {
+            bottom: 0;
+            opacity: 0;
+         }
+      }
+   </style>
+</head>
+
+<body>
+   <header>
+      <div class="beo-header-container">
+         <img src="images/beo_logo.png" alt="beo logo"></img>
+         <div class="beo-avatar-container">
+            <img src="images/beo_bg01.png" class="avatar__image" alt="beo logo" onclick="alertTest()"> </img>
+         </div>
+      </div>
+   </header>
+
+   <main>
+      <section class="beo-section-container">
+         <div class="beo-main-text-container">
+            <span class="beo-main-title1">\(카카오톡 이름)님을 위한 선물 제안서</span>
+         </div>
+         <div class="beo-main-text-container">
+            <span class="beo-main-contents1">200백만개의 상품 데이터베이스에서
+               \(카카오톡 이름)님에게 가장 잘 맞는 선물을 찾아보았어요.
+               광고 없이 오직 당신의 만족만을 생각하고 제안합니다.</span>
+         </div>
+         <div class="beo-main-profile-container">
+            <div class="beo-main-text-container">
+               <div class="beo-main-text-container2">
+                  <span class="beo-main-title2">For. 비공개</span>
+               </div>
+               <div class="beo-main-text-container2">
+                  <span class="beo-main-contents1">선물대상</span>
+                  <span class="beo-main-contents2">친구</span>
+               </div>
+               <div class="beo-main-text-container2">
+                  <span class="beo-main-contents1">선물상황</span>
+                  <span class="beo-main-contents2">생일 선물/일반적인 생일</span>
+               </div>
+               <div class="beo-main-text-container2">
+                  <span class="beo-main-contents1">나이</span>
+                  <span class="beo-main-contents2">25~31세</span>
+               </div>
+               <div class="beo-main-text-container2">
+                  <span class="beo-main-contents1">성별</span>
+                  <span class="beo-main-contents2">여성</span>
+               </div>
+               <div class="beo-main-text-container2">
+                  <span class="beo-main-contents1">선물예산</span>
+                  <span class="beo-main-contents2">20만원 내외</span>
+               </div>
+               <div class="beo-main-text-container2">
+                  <span class="beo-main-contents1">관심사</span>
+                  <span class="beo-main-contents2">화장품</span>
+               </div>
+               <div class="beo-main-text-container3">
+                  <img src="images/beo_logo.png" alt="beo logo"></img>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section>
+         <div class="beo-main-slider-container">
+            <div class="slideshow-container">
+               <div class="main-slides rightShow">
+                  <picture>
+                     <source media="(min-width: 360px) and (max-width: 599px)" srcset="images/beo_review01.png">
+                     <source media="(min-width: 600px) " srcset="images/beo_review01.png">
+                     <img class="slideshow-container-image" src="images/beo_review01.png" alt="Main image">
+                  </picture>
+               </div>
+               <div class="main-slides hide">
+                  <picture>
+                     <source media="(min-width: 360px) and (max-width: 599px)" srcset="images/beo_bg01.png">
+                     <source media="(min-width: 600px) " srcset="images/beo_bg01.png">
+                     <img class="slideshow-container-image" src="images/beo_bg01.png" alt="Main image">
+                  </picture>
+               </div>
+               <div class="main-slides hide">
+                  <picture>
+                     <source media="(min-width: 360px) and (max-width: 599px)" srcset="images/beo_review03.png">
+                     <source media="(min-width: 600px) " srcset="images/beo_review03.png">
+                     <img class="slideshow-container-image" src="images/beo_review03.png" alt="Main image">
+                  </picture>
+               </div>
+            </div>
+            <div class="dotContainer">
+               <span class="dot" onclick="currentSlide(1)"></span>
+               <span class="dot" onclick="currentSlide(2)"></span>
+               <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+         </div>
+      </section>
+      <div class="beo-main-comment-container">
+         <div class="comment-num">01</div>
+         <div class="comment-numbering"> 첫번째 선물 추천 </div>
+         <div class="comment-title">첫번째 선물 추천 제품명이 들어갑니다. 길어지면 두줄까지 보여집니다.</div>
+         <hr class="comment-divider" />
+      </div>
+      <div class="beo-main-reason-container">
+         <div class="comment-reason"> 추천 이유</div>
+         <div class="comment-reasons"> 추천 이유 (태그라인)설명이 들어갑니다.
+            추천 이유 텍스트가 길어지는 경우, 길게 전체 다 보여져야합니다.</div>
+         <hr class="comment-divider2" />
+      </div>
+      <div class="beo-main-price-container">
+         <div>
+            <span class="comment-price">제품 가격</span> <span class="comment-price2">367,000원</span>
+         </div>
+
+         <div class="comment-product">제품 설명</div>
+
+         <div class="comment-products">상품 설명이 보여집니다.
+            <div>상품 설명이 없는 경우, 상단 ‘제품 설명’ 텍스트까지 전체 다 보여지지 않습니다.</div>
+         </div>
+      </div>
+      <div class="beo-main-button-container">
+         <span class="button-text">구매하기</span>
+         <i onclick="myFunction(this)" class="material-icons"
+            style="position: absolute; left: 95px; top: 13px; z-index: 2;"> favorite_border</i>
+         <span class="button-buy"> <img src='images/rectangle.png' style=" width: 100%; height: 56px;" /> </span>
+         <span class="button-heart"> <img src='images/rectangle2.png' /></span>
+         <span class="button-shared"> <img src='images/shared1.png' /> </span>
+      </div>
+
+      <div class="beo-main-more-container"></div>
+
+      <div class="comment-divider3"></div>
+      <div class="beo-main-link-container">
+
+         <div class="link-text1">
+            혼자 결정하기 어렵다면,</div>
+
+         <div class="link-text2">
+            <div>친구에게 물어보기</div>
+         </div>
+         <span class="link-img">
+            <img src='images/kakaocomment.png' />
+         </span>
+         <span class="link-icon1">
+            <img src='images/kakaoicon.png' />
+         </span>
+         <span class="link-icon2">
+            <img src='images/shared.png' />
+         </span>
+
+      </div>
+
+      <div class="landing-main-fade-up-accordian" data-aos="fade-up">
+         <button class="accordion active">
+            <div class="landing-main-fade-up-title">
+               <span class="landing-main-fade-up-title-Q">Q</span> 그래도 결정하기 힘드시다면?
+            </div>
+         </button>
+         <div class="panel">
+            <div class="landing-main-fade-up-comment">
+               <div>추천받은 선물에 확신이 들지 않는다면 친구에게 물어보기 기능을 사용해 보세요. 간단하게 친구에게 제안서를 공유하고 의견을 물어볼 수 있어요.</div>
+
+            </div>
+         </div>
+         <button class="accordion">
+            <div class="landing-main-fade-up-title">
+               <span class="landing-main-fade-up-title-Q">Q</span> 추천 선물들을 나중에 또 보고 싶다면?
+            </div>
+         </button>
+         <div class="panel">
+            <div class="landing-main-fade-up-comment">
+               추천받은 선물 중에 나중에 따로 찾아보고 싶은 선물은 하트터치로 찜 할 수 있어요. 또한 받으신 제안서들도 모두 마이페이지에서 다시 볼 수 있으니 걱정 마세요.
+            </div>
+         </div>
+         <button class="accordion">
+            <div class="landing-main-fade-up-title">
+               <span class="landing-main-fade-up-title-Q">Q</span> 선물 추천을 더 받아볼 수는 없나요?
+            </div>
+         </button>
+         <div class="panel">
+            <div class="landing-main-fade-up-comment">
+               베오의 선물 제안서는 10개의 선물을 추천드리고 있습니다. 그 안에서 고민이 해결되시길 바라지만 혹 더 추천을 받고 싶다면 얼마든지 무료로 횟수 제한없이 베오를 이용할 수 있어요.
+            </div>
+         </div>
+      </div>
+
+      <div class="beo-main-gift-container">
+         <div class="gift-title">선물 연구소</div>
+         <div class="gift-title2">좋은 선물에 대해서 고민하고 연구합니다.</div>
+         <div class="gift-img1">
+            <img src='images/beo_gift01.png' />
+         </div>
+         <div class="gift-img2">
+            <img src='images/beo_gift02.png' />
+         </div>
+      </div>
+      <div class="beo-main-footer-container">
+         <div class="footer-text01">
+            <span>고객문의</span> | <span>이용약관</span> | <span>개인정보방침</span>
+         </div>
+         <div class="footer-text02">베오는 통신판매의 거래 당사자가 아니므로, 상품의 주문, 배송 및 환불등과 관련한 의무와 책임은 각 판매자에게 있습니다.
+            판매자가 등록한 상품정보 및 거래 등에 대해 일체 책임을 지지 않습니다.</div>
+         <div class="footer-img">
+            <img src="images/beo_logo_gray.png" />
+         </div>
+         <span class="footer-text03">(주)비타브리비스</span>
+         <span class="footer-text04">대표 윤화식</span><br />
+         <span class="footer-text05">사업자등록번호</span>
+         <span class="footer-text06">781-86-02377</span><br />
+         <span class="footer-text07">통신판매업신고번호</span>
+         <span class="footer-text08">제2021-서울금천-1982호</span>
+         <span class="footer-text-1">사업자정보 확인</span><br />
+         <span class="footer-text09">이메일</span>
+         <span class="footer-text10">help@vitabrevis.ai</span>
+
+      </div>
+
+
+   </main>
+   <div id="snackbar">내가 찜한 선물이 추가되었습니다.</div>
+   <div id="snackbar2">내가 찜한 선물에서 삭제되었습니다.</div>
+</body>
+<script>
+   class Swipe {
+      constructor(elem, options = {}) {
+         this.elem = elem;
+         this.minDistance = options.minDistance || 100;
+         this.maxTime = options.maxTime || 500;
+         this.corners = options.corners || false;
+         this.addListeners();
+         this.events = {
+            live: [],
+            after: []
+         };
+         Swipe.directions().forEach(direction => this.events[direction] = []);
+      }
+
+      static directions() {
+         return ['left', 'right', 'up', 'down', 'leftup', 'leftdown', 'rightup', 'rightdown'];
+      }
+
+      static position(e) {
+         return { x: e.pageX, y: e.pageY };
+      }
+
+      static getOffsets(e, startPos) {
+         const newPos = Swipe.position(e);
+         return {
+            x: newPos.x - startPos.x,
+            y: newPos.y - startPos.y
+         };
+      }
+
+      static getDirections(offsets, corners) {
+         const directions = {};
+         directions.left = offsets.x <= 0 ? Math.abs(offsets.x) : 0;
+         directions.right = offsets.x >= 0 ? Math.abs(offsets.x) : 0;
+         directions.up = offsets.y <= 0 ? Math.abs(offsets.y) : 0;
+         directions.down = offsets.y >= 0 ? Math.abs(offsets.y) : 0;
+
+         if (corners) {
+            directions.leftup = (Math.abs((directions.left + directions.up)) / 1.5);
+            directions.leftdown = (Math.abs((directions.left + directions.down)) / 1.5);
+            directions.rightup = (Math.abs((directions.right + directions.up)) / 1.5);
+            directions.rightdown = (Math.abs((directions.right + directions.down)) / 1.5);
+         }
+
+         return directions;
+      }
+
+      static order(directions) {
+         return Object.keys(directions).sort((a, b) => directions[b] - directions[a]);
+      }
+
+      addEventListener(evt, bc) {
+         const keys = Object.keys(this.events);
+         if (keys.indexOf(evt) !== -1) {
+            this.events[evt].push(bc);
+            const i = this.events.length - 1;
+            return {
+               clear: () => {
+                  this.events[i] = undefined;
+               }
+            };
+         } else {
+            throw new Error("Event is not valid, use " + keys.join(", "));
+         }
+      }
+
+      down(e) {
+         var a = e.touches == undefined ? e : e.touches[0]
+         e.preventDefault();
+         this.didDown = true;
+         this.startTime = Date.now();
+         this.startPos = Swipe.position(a);
+      }
+
+      move(e) {
+         e.preventDefault();
+         if (!this.didDown) {
+            return;
+         }
+         this.didSwipe = true;
+         var a = e.touches == undefined ? e : e.touches[0]
+         if (this.events.live.length > 0) {
+            const offsets = Swipe.getOffsets(a, this.startPos);
+            const directions = Swipe.getDirections(offsets, this.corners);
+            const direction = Swipe.order(directions)[0];
+            const distance = directions[direction];
+            this.events.live.forEach(evt => {
+               if (typeof evt === "function") {
+                  evt(direction, distance);
+               }
+            });
+         }
+      }
+
+      up(e) {
+         console.log(e);
+         console.log(this.didSwipe);
+         e.preventDefault();
+         this.didDown = false;
+         if (!this.didSwipe) {
+            return;
+         }
+         this.didSwipe = false;
+         var a = e.changedTouches == undefined ? e : e.changedTouches[0]
+         const elapsedTime = Date.now() - this.startTime;
+         if (elapsedTime <= this.maxTime) {
+            const offsets = Swipe.getOffsets(a, this.startPos);
+            const directions = Swipe.getDirections(offsets, this.corners);
+            const direction = Swipe.order(directions)[0];
+            const distance = directions[direction];
+
+            if (distance >= this.minDistance) {
+               this.events.after.forEach(evt => {
+                  if (typeof evt === "function") {
+                     evt(direction, distance);
+                  }
+               });
+
+               this.events[direction].forEach(evt => {
+                  if (typeof evt === "function") {
+                     evt(distance);
+                  }
+               });
+            }
+         }
+      }
+
+      addListeners() {
+         this.elem.addEventListener("touchstart", e => this.down(e));
+         this.elem.addEventListener("mousedown", e => this.down(e));
+         this.elem.addEventListener("touchmove", e => this.move(e));
+         document.addEventListener("mousemove", e => this.move(e));
+         this.elem.addEventListener("touchend", e => this.up(e));
+         document.addEventListener("mouseup", e => this.up(e));
+      }
+   }
+
+   //CODE FOR ANIMATION
+   const slider = document.querySelector('.slideshow-container');
+   const elem = slider.children;
+   const classes = Swipe.directions();
+   function runAnimation(direction) {
+      var futurePosition = 0;
+      for (var i = 0; i <= elem.length - 1; i++) {
+         if (elem[i].classList.contains('leftShow') || elem[i].classList.contains('rightShow')) {
+            elem[i].classList.remove.apply(elem[i].classList, ['leftShow', 'rightShow', 'show']);
+            elem[i].classList.remove.apply(elem[i].classList, classes);
+            elem[i].classList.add.apply(elem[i].classList, ['hide']);
+
+            if (direction === "left") {
+               futurePosition = i + 1;
+               if (i == elem.length - 1) {
+                  futurePosition = 0;
+               }
+            }
+
+            if (direction === "right") {
+               futurePosition = i - 1;
+               if (i == 0) {
+                  futurePosition = elem.length - 1;
+               }
+            }
+         }
+      }
+
+      if (direction === "left") {
+         //elem[futurePosition].classList.add.apply(elem[futurePosition].classList, ['leftShow']);
+         setTimeout(() => elem[futurePosition].classList.add.apply(elem[futurePosition].classList, ['leftShow']), 1);
+         elem[futurePosition].classList.remove.apply(elem[futurePosition].classList, ['hide']);
+      }
+
+      if (direction === "right") {
+         //elem[futurePosition].classList.add.apply(elem[futurePosition].classList, ['rightShow']);
+         setTimeout(() => elem[futurePosition].classList.add.apply(elem[futurePosition].classList, ['rightShow']), 1);
+         elem[futurePosition].classList.remove.apply(elem[futurePosition].classList, ['hide']);
+      }
+
+      var dots = document.getElementsByClassName("dot");
+      for (i = 0; i < dots.length; i++) {
+         dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      dots[futurePosition].className += " active";
+   };
+
+   //SWIPE INITIALIZATION
+   const swipe = new Swipe(slider, {
+      corners: true,
+      minDistance: 50
+   });
+   let afterEvent = swipe.addEventListener("after", direction => {
+      runAnimation(direction);
+   });
+
+   let liveEvent = swipe.addEventListener("live", direction => {
+
+   });
+
+   //REMOVE EVENT WITH evt.clear();
+
+   var slideIndex = 1;
+   showSlides(slideIndex);
+
+   function plusSlides(n) {
+      showSlides(slideIndex += n);
+   }
+
+   function currentSlide(n) {
+      showSlides(slideIndex = n);
+   }
+
+   function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("main-slides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      // 전체 none
+      for (var i = 0; i <= elem.length - 1; i++) {
+         elem[i].classList.remove.apply(elem[i].classList, ['leftShow', 'rightShow', 'show']);
+         elem[i].classList.remove.apply(elem[i].classList, classes);
+         elem[i].classList.add.apply(elem[i].classList, ['hide']);
+      }
+
+      for (i = 0; i < dots.length; i++) {
+         dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      // slideIndex-1 만 block
+      setTimeout(() => elem[slideIndex - 1].classList.add.apply(elem[slideIndex - 1].classList, ['leftShow']), 1);
+      elem[slideIndex - 1].classList.remove.apply(elem[slideIndex - 1].classList, ['hide']);
+      dots[slideIndex - 1].className += " active";
+   }
+
+   let intervalIndex = 2;
+
+   function setIntervalSlide() {
+      currentSlide(intervalIndex);
+      if (intervalIndex == 3) intervalIndex = 0;
+      intervalIndex++;
+   }
+
+
+   setInterval(setIntervalSlide, 2000);
+</script>
+
+<script>
+   var acc = document.getElementsByClassName("accordion");
+   var pan = document.getElementsByClassName("panel");
+
+   if (acc[0].classList[1] == "active")
+      pan[0].style.maxHeight = pan[0].scrollHeight + "px";
+
+   for (var i = 0; i < acc.length; i++) {
+      acc[i].onclick = function () {
+         // 클릭이 일어났을 때 기존에 열려 있던 아코디언을 접는다. (1개의 아코디언만 열리게)
+         for (var j = 0; j < acc.length; j++) {
+            // 버튼 상태에 입혀진 active 라는 클래스를 지운다.
+            acc[j].classList.remove("active");
+            // 버튼 다음에 있는 div 콘텐츠 높이를 0으로 만든다. == 아코디언을 접는다.
+            if (this !== acc[j]) {
+               acc[j].nextElementSibling.style.maxHeight = null;
+            }
+         }
+
+         this.classList.toggle("active");
+         var panel = this.nextElementSibling;
+         if (panel.style.maxHeight) {
+            this.classList.remove("active");
+            panel.style.maxHeight = null;
+         } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+         }
+      };
+   }
+</script>
+
+<script>
+   //NAV HEART COLOR CHANGING
+   const navIconBtnLike = document.querySelector('.nav-icon-btn.like');
+   const navHeartSvg = document.querySelector('.nav-icon.like');
+   const navHeartPath = document.querySelector('.nav-icon.like path')
+   const cList = navHeartSvg.classList;
+   navIconBtnLike.addEventListener('click', (e) => { fillHeartBlack(cList, navHeartSvg, navHeartPath); preventRefresh(e); });
+   function fillHeartBlack(cList, navHeartSvg, navHeartPath) {
+      if (cList.contains("nav-icon") && cList.contains("like")) {
+         navHeartSvg.classList.remove("nav-icon", "like");
+         navHeartSvg.classList.add("nav-icon", "like-fill");
+         navHeartPath.setAttribute('d', 'M34.6 6....')
+      }
+      else {
+         navHeartSvg.classList.remove("nav-icon", "like-fill");
+         navHeartSvg.classList.add("nav-icon", "like");
+         navHeartPath.setAttribute('d', 'M34.6 3....')
+      }
+   }
+   function preventRefresh(e) {
+      e.preventDefault()
+   }
+</script>
+
+<script>
+   function myFunction(x) {
+      console.log(x.innerText);
+      if (x.innerText == 'favorite_border') {
+         x.innerText = 'favorite';
+         x.style = 'color:#EC5800; position: absolute; left: 95px; top: 13px; z-index: 2;'
+         var x = document.getElementById("snackbar");
+         x.className = "show";
+         setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+      } else {
+
+         x.innerText = 'favorite_border';
+         x.style = 'color:black; position: absolute; left: 95px; top: 13px; z-index: 2;'
+         var y = document.getElementById("snackbar2");
+         console.log(y);
+         y.className = "show2";
+         setTimeout(function () { y.className = y.className.replace("show2", ""); }, 3000);
+      }
+      // x.classList.toggle("fa-thumbs-down");
+   }
+</script>
+<script>
+   function alertTest() {
+      confirm('confirm test');
+   }
+</script>
+
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Html CRUD with Pure JavaScript
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+    <button onclick="newUser()">new</button>
+
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <th>ProductID</th>
+                    <th>ProductName</th>
+                    <th>Price</th>
+                    <th>ProductDesc</th>
+                    <th>Reason</th>
+                    <th>ReasonEdit</th>
+                    <th>SiteLink</th>
+                    <th>TagLines</th>
+                    <th>Custom</th>
+                    <th>Property</th>
+                    <th>CreateName</th>
+                    <th>CreateDate</th>
+                    <th>Gender</th>
+                    <th>DbKeepon</th>
+
+      
+
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>ProductID*</label>
+            <input type="text" name="ProductID" id="ProductIDForm">
+        </div>
+        <div>
+            <label>ProductName</label>
+            <input type="text" name="ProductName" id="ProductNameForm">
+        </div>
+        <div>
+            <label>Price</label>
+            <input type="text" name="Price" id="PriceForm">
+        </div>
+        <div>
+            <label>ProductDesc</label>
+            <input type="text" name="ProductDesc" id="ProductDescForm">
+        </div>
+        <div>
+            <label>Reason</label>
+            <input type="text" name="Reason" id="ReasonForm">
+        </div>
+        <div>
+            <label>ReasonEdit</label>
+            <input type="text" name="ReasonEdit" id="ReasonEditForm">
+        </div>
+        <div>
+            <label>SiteLink</label>
+            <input type="text" name="SiteLink" id="SiteLinkForm">
+        </div>
+        <div>
+            <label>TagLines</label>
+            <input type="text" name="TagLines" id="TagLinesForm">
+        </div>
+        <div>
+            <label>Custom</label>
+            <input type="text" name="Custom" id="CustomForm">
+        </div>
+        <div>
+            <label>Property</label>
+            <input type="text" name="Property" id="PropertyForm">
+        </div>
+        <div>
+            <label>CreateName</label>
+            <input type="text" name="CreateName" id="CreateNameForm">
+        </div>
+        <div>
+            <label>CreateDate</label>
+            <input type="text" name="CreateDate" id="CreateDateForm">
+        </div>
+        <div>
+            <label>Gender</label>
+            <input type="text" name="Gender" id="GenderForm">
+        </div>
+        <div>
+            <label>DbKeepon</label>
+            <input type="text" name="DbKeepon" id="DbKeeponForm">
+        </div>
+
+
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+        $("#userInfo").empty();
+
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/products", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    var tr_obj = document.createElement("tr");
+                    const ProductID = document.createElement("td");
+                    const ProductName = document.createElement("td");
+                    const Price = document.createElement("td");
+                    const ProductDesc = document.createElement("td");
+                    const Reason = document.createElement("td");
+                    const ReasonEdit = document.createElement("td");
+                    const SiteLink = document.createElement("td");
+                    const TagLines = document.createElement("td");
+                    const Custom = document.createElement("td");
+                    const Property = document.createElement("td");
+                    const CreateName = document.createElement("td");
+                    const CreateDate = document.createElement("td");
+                    const Gender = document.createElement("td");
+                    const DbKeepon = document.createElement("td");
+         
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    Edit.id = i;
+                    ProductID.textContent = data[i].ProductID;
+                    ProductName.textContent = data[i].ProductName;
+                    Price.textContent = data[i].Price;
+                    ProductDesc.textContent = data[i].ProductDesc;
+                    Reason.textContent = data[i].Reason;
+                    ReasonEdit.textContent = data[i].ReasonEdit;
+                    SiteLink.textContent = data[i].SiteLink;
+                    TagLines.textContent = data[i].TagLines;
+                    Custom.textContent = data[i].Custom;
+                    Property.textContent = data[i].Property;
+                    CreateName.textContent = data[i].CreateName;
+                    CreateDate.textContent = data[i].CreateDate;
+                    Gender.textContent = data[i].Gender;
+                    DbKeepon.textContent = data[i].DbKeepon;
+               
+
+                    // Edit.onclick = 'editUser()';
+                    Edit.innerHTML = `<a onClick="editUser(this.id)">Edit</a>`;
+
+                    Delete.innerHTML = `<a onClick="deleteUser()">Delete</a>`;
+
+                    const userInfo = document.getElementById("userInfo");
+                    tr_obj.appendChild(ProductID);
+                    tr_obj.appendChild(ProductName);
+                    tr_obj.appendChild(Price);
+                    tr_obj.appendChild(ProductDesc);
+                    tr_obj.appendChild(Reason);
+                    tr_obj.appendChild(ReasonEdit);
+                    tr_obj.appendChild(SiteLink);
+                    tr_obj.appendChild(TagLines);
+                    tr_obj.appendChild(Custom);
+                    tr_obj.appendChild(Property);
+                    tr_obj.appendChild(CreateName);
+                    tr_obj.appendChild(CreateDate);
+                    tr_obj.appendChild(Gender);
+                    tr_obj.appendChild(DbKeepon);
+                 
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "Ages": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/ages", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if(data.sqlMessage){
+                    alert('상위 테이블을 삭제하세요. \n'+data.sqlMessage);
+                }else{
+                    alert("delete succeseed!");
+                }
+     
+               
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var ProductID = document.getElementById("ProductID").value;
+        var ProductName = document.getElementById("ProductName").value;
+        var Price = document.getElementById("Price").value;
+        var ProductDesc = document.getElementById("ProductDesc").value;
+        var Reason = document.getElementById("Reason").value;
+        var ReasonEdit = document.getElementById("ReasonEdit").value;
+        var SiteLink = document.getElementById("SiteLink").value;
+        var TagLines = document.getElementById("TagLines").value;
+        var Custom = document.getElementById("Custom").value;
+        var Property = document.getElementById("Property").value;
+        var CreateName = document.getElementById("CreateName").value;
+        var CreateDate = document.getElementById("CreateDate").value;
+        var Gender = document.getElementById("Gender").value;
+        var DbKeepon = document.getElementById("DbKeepon").value;
+   
+
+
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ 
+                "ProductID": ProductID, 
+                "ProductName": ProductName,
+                "Price": Price, 
+                "ProductDesc": ProductDesc,
+                "Reason": Reason, 
+                "ReasonEdit": ReasonEdit,
+                "SiteLink": SiteLink, 
+                "TagLines": TagLines,
+                "Custom": Custom, 
+                "Property": Property,
+                "CreateName": CreateName, 
+                "CreateDate": CreateDate, 
+                "Gender": Gender,
+                "DbKeepon": DbKeepon, 
+              }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/products", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("ProductID").value = "";
+        document.getElementById("ProductName").value = "";
+        document.getElementById("Price").value = "";
+        document.getElementById("ProductDesc").value = "";
+        document.getElementById("Reason").value = "";
+        document.getElementById("ReasonEdit").value = "";
+        document.getElementById("SiteLink").value = "";
+        document.getElementById("TagLines").value = "";
+        document.getElementById("Custom").value = "";
+        document.getElementById("Property").value = "";
+        document.getElementById("CreateName").value = "";
+        document.getElementById("CreateDate").value = "";
+        document.getElementById("Gender").value = "";
+        document.getElementById("DbKeepon").value = "";
+    
+    }
+
+    function fnGoInsert(clicked_id) {
+
+
+        alert(clicked_id);
+
+    }
+</script>
+
+</html>

@@ -54,7 +54,7 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.User = require('./users')(sequelize, Sequelize);
+db.users = require('./users')(sequelize, Sequelize);
 // db.Authority = require('./authority')(sequelize, Sequelize);
 // db.Category = require('./category')(sequelize, Sequelize);
 // db.Department = require('./department')(sequelize, Sequelize);

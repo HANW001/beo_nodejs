@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>edit page</title>
+</head>
+
+<body>
+    <h1>edit page</h1>
+
+    <table class="list">
+        <tbody id="editTableTBody"></tbody>
+    </table>
+
+    <button onclick="update('category')">category</button>
+
+    <script>
+        var params = location.search.substr(location.search.indexOf("?") + 1);
+        var sval = "";
+        var originalVal = "";
+
+        paramss = params.split("&");
+
+        paramList = paramss[1].split(",");
+        const editTableTBody = document.getElementById("editTableTBody");
+        
+        var tr_obj = document.createElement("tr");
+
+        for (let i = 0; i < paramList.length; i++) {
+            const td_obj = document.createElement("input");
+            td_obj.id = "editTableTdId" + i;
+            if(i==0){
+                td_obj.value = paramss[1].split(",")[i].split("=")[2];
+            }else{
+                td_obj.value = paramss[1].split(",")[i].split("=")[1];
+            }
+           
+            tr_obj.appendChild(td_obj);
+        }
+
+        editTableTBody.appendChild(tr_obj);
+
+        function update() {
+            const config = {
+                method: "put",
+                body: JSON.stringify({ "CategoryName": document.getElementById("editTableTdId1").value, "Category": document.getElementById("editTableTdId0").value, "originalCategory": paramss[2].split('=')[1]}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            fetch("http:/localhost:5000/admin/category", config)
+                .then(response => response.json())
+                .then(data =>
+                // console.log(data[0].PriceRange)
+                {
+                    alert("update succeseed!");   
+                }
+                )
+                .catch(error => console.log(error));
+        }
+    </script>
+
+
+    <button onclick="test()">test</button>
+</body>
+
+<script>
+    function test(){
+        console.log( paramss[1].split(",")[1])
+        console.log( document.getElementById("editTableTdId0").value)
+    }
+</script>
+</html>

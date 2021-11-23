@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>
+            Html CRUD with Pure JavaScript
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <!-- <form action='http://localhost:5000/gift/test' method="GET"> -->
+                    <form>
+                    <!-- <div>
+                        <label>PriceRange*</label>
+                        <input type="text" name="PriceRange" id="PriceRange">
+                    </div>
+                    <div>
+                        <label>FromPrice</label>
+                        <input type="text" name="FromPrice" id="FromPrice">
+                    </div>
+                    <div>
+                        <label>ToPrice</label>
+                        <input type="text" name="ToPrice" id="ToPrice">
+                    </div> -->
+              
+                    <!-- <div  class="form-action-buttons">
+                        <input type="submit">
+                    </div> -->
+                    <button onclick="getUser()">클릭</button>
+                </form>
+            </td>
+            <td>
+                <table class="list" id="employeeList">
+                    <thead>
+                        <tr>
+                            <th>PriceRange</th>
+                            <th>FromPrice</th>
+                            <th>ToPrice</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td id="PriceRanges"></td>  
+                        <td id="FromPrices"></td>
+                        <td id="ToPrices"></td>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- <script src="script.js"></script> -->
+</body>
+
+<script>
+    function getUser() {
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/gift/test", config)
+            .then(response => response.json())
+            .then(data =>
+            console.log(data[0].PriceRange)
+            // {
+
+            //     for (let i = 0; i < data.length; i++) {
+            //         const PriceRange = document.createElement("td");
+            //         const FromPrice = document.createElement("td");
+            //         const ToPrice = document.createElement("td");
+            //         PriceRange.textContent = data[i].PriceRange;
+            //         FromPrice.textContent = data[i].FromPrice;
+            //         ToPrice.textContent = data[i].ToPrice;
+            //         const PriceRanges = document.getElementById("PriceRanges");
+            //         PriceRange.appendChild(PriceRange);
+            //         const FromPrices = document.getElementById("FromPrices");
+            //         FromPrice.appendChild(FromPrice);
+            //         const ToPrices = document.getElementById("ToPrices");
+            //         ToPrice.appendChild(ToPrice);
+
+            //     }
+
+            // }
+            )
+            .catch(error => console.log(error));
+    }
+</script>
+
+</html>

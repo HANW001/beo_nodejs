@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!-- <title>Kakao JavaScript SDK</title>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('592b62707a03c5616e19cdbbf985a42b');
+
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+    </script> -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+
+<body>
+    <div className="App">
+        <a onclick="postDatas()" href="http://localhost:5000/oauth"><img src="/kakao_login.jpg" /> </a>
+    </div>
+    <h1 onclick="postDatas()">test</h1>
+</body>
+<script>
+
+    function postDatas() {
+        var ProductID = [100000, 100001, 100002];
+        // sessionStorage.setItem(`key1${i}`, 10);
+        // sessionStorage.setItem("key2", new Date());
+        // var n = sessionStorage.getItem("key1");
+        // console.log(typeof n); //string 출력
+        // var d = sessionStorage.getItem("key2");
+        // console.log(typeof d); //string 출력
+
+        console.log(JSON.stringify({ "ProductID": "'" + ProductID.join("' or a.ProductID= '") + "'" }));
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ "ProductID": "'" + ProductID.join("' or a.ProductID= '") + "'" }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        fetch("/gift/product", postData)
+            .then((response) => response.json())
+            .then((data) => {
+
+                // console.log(data);
+                console.log(JSON.parse(JSON.stringify(data)));
+                sessionStorage.setItem('key1', JSON.stringify(data));
+                sessionStorage.setItem('key2', "value2");
+                // console.log(data),
+                // ProductNames.append(data[0].ProductName),
+                // Reasons.append(data[0].Reason),
+                // Prices.append(data[0].Price),
+                // ProductDescs.append(data[0].ProductDesc)
+                alert(JSON.stringify(data));
+            }
+
+            );
+
+        var n1 = sessionStorage.getItem("key1");
+        console.log(typeof n1); //string 출력
+        console.log(JSON.parse(n1));
+        //   console.log(JSON.parse(n).ProductName);
+        console.log(n1);
+        location.sStorage = n1;
+    }
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Html CRUD with Pure JavaScript
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+    <button onclick="newUser()">new</button>
+
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <th>ProductID</th>
+                    <th>n1</th>
+                    <th>n2</th>
+  
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>ProductID*</label>
+            <input type="text" name="ProductID" id="ProductIDForm">
+        </div>
+        <div>
+            <label>n1</label>
+            <input type="text" name="n1" id="n1Form">
+        </div>
+        <div>
+            <label>n2</label>
+            <input type="text" name="n2" id="n2Form">
+        </div>
+
+
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+        $("#userInfo").empty();
+
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/temp_nature", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    var tr_obj = document.createElement("tr");
+                    const ProductID = document.createElement("td");
+                    const n1 = document.createElement("td");
+                    const n2 = document.createElement("td");
+  
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    Edit.id = i;
+                    ProductID.textContent = data[i].ProductID;
+                    n1.textContent = data[i].n1;
+                    n2.textContent = data[i].n2;
+   
+
+                    // Edit.onclick = 'editUser()';
+                    Edit.innerHTML = `<a onClick="editUser(this.id)">Edit</a>`;
+
+                    Delete.innerHTML = `<a onClick="deleteUser()">Delete</a>`;
+
+                    const userInfo = document.getElementById("userInfo");
+                    tr_obj.appendChild(ProductID);
+                    tr_obj.appendChild(n1);
+                    tr_obj.appendChild(n2);
+       
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "Ages": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/ages", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if(data.sqlMessage){
+                    alert('상위 테이블을 삭제하세요. \n'+data.sqlMessage);
+                }else{
+                    alert("delete succeseed!");
+                }
+     
+               
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var PriceRange = document.getElementById("ProductID").value;
+        var n1 = document.getElementById("n1").value;
+        var n2 = document.getElementById("n2").value;
+    
+
+
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ 
+                "ProductID": ProductID, 
+                "n1": n1,
+                "n2": n2, 
+          }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/temp_nature", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("ProductID").value = "";
+        document.getElementById("n1").value = "";
+        document.getElementById("n2").value = "";
+
+    }
+
+    function fnGoInsert(clicked_id) {
+
+
+        alert(clicked_id);
+
+    }
+</script>
+
+</html>

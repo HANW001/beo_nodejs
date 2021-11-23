@@ -1,0 +1,3008 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Responsive HTML images demo</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: Spoqa;
+      src: url("fonts/SpoqaHanSansNeo-Regular.otf") format('OpenType');
+    }
+
+    @font-face {
+      font-family: Pretendard;
+      src: url("fonts/Pretendard-Regular.otf") format('OpenType');
+    }
+
+
+    .header {
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      width: 100%;
+      text-align: center;
+      max-width: 1440px;
+      height: 60px;
+      left: 0;
+      right: 0;
+      background-color: white;
+      margin: auto;
+    }
+
+    .header-left {
+      position: absolute;
+      top: 17px;
+      left: 230px;
+    }
+
+    .header-right {
+      position: absolute;
+      top: 17px;
+      right: 230px;
+    }
+
+    @media screen and (min-width: 360px) and (max-width: 1019px) {
+      html {
+        font-family: sans-serif;
+        /* background-color: gray; */
+      }
+
+      body {
+        max-width: 1440px;
+        margin: 0 auto;
+        background-color: white;
+      }
+
+      .header-left {
+        position: absolute;
+        top: 17px;
+        left: 80px;
+      }
+
+      .header-right {
+        position: absolute;
+        top: 17px;
+        right: 80px;
+      }
+
+
+      .landing-main-image {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        width
+        /***/
+        : auto;
+        /* only IE8 */
+        height: auto;
+        /* vertical-align: bottom; */
+      }
+
+      .landing-main-container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        background-color: #beb0a7;
+      }
+
+      .landing-main-fade-up-80 {
+        position: absolute;
+        top: 80px;
+        left: 20px;
+      }
+
+      .landing-main-fade-up-95 {
+        position: absolute;
+        top: 95px;
+        left: 20px;
+
+        color: white;
+        font-size: 32px;
+        font-family: Pretendard;
+        font-weight: bold;
+      }
+
+      .landing-main-fade-up-140 {
+        position: absolute;
+        top: 140px;
+        left: 20px;
+        color: white;
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 32px;
+      }
+
+      .landing-main-fade-up-205 {
+        position: absolute;
+        top: 205px;
+        left: 20px;
+
+        font-family: "Pretendard";
+        font-size: 14px;
+        color: #ffffff;
+      }
+
+      .landing-main-fade-up-225 {
+        position: absolute;
+        top: 225px;
+        left: 20px;
+
+        font-family: "Pretendard";
+        font-size: 14px;
+        color: #ffffff;
+      }
+
+      .beo-main-slider-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slideshow-container {
+        position: relative;
+        animation: slide 1s infinite;
+        width: 100%;
+        min-height: 288px;
+        overflow: hidden;
+        background-color: #beb0a7;
+        text-align: center;
+      }
+
+      .dotContainer {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .leftShow {
+        position: absolute;
+        width: 100%;
+        display: block;
+        animation-name: left;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      .rightShow {
+        position: absolute;
+        width: 100%;
+        display: block;
+        animation-name: right;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      @keyframes left {
+        0% {
+          left: 100%;
+        }
+
+        100% {
+          left: 0%;
+        }
+      }
+
+      @keyframes right {
+        0% {
+          left: -100%;
+        }
+
+        100% {
+          left: 0%;
+        }
+      }
+
+      /* The dots/bullets/indicators */
+      .dot {
+        cursor: pointer;
+        height: 8px;
+        width: 8px;
+        margin: 0 2px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+      }
+
+      .active {
+        background-color: #ec5800;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .slider__item {
+        width: 100%;
+        text-align: center;
+      }
+
+      .slider-title {
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        text-align: center;
+        color: #45332f;
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .slider-comment {
+        position: absolute;
+        top: 90px;
+        width: 100%;
+        text-align: center;
+        white-space: pre-line;
+        color: #ffffff;
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .slider-name {
+        position: absolute;
+        width: 100%;
+        top: 178px;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 12px;
+      }
+
+      .landing-main-container2 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 758px;
+
+      }
+
+      .landing-main-fade-up-60 {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        font-family: Pretendard;
+        font-size: 16px;
+        color: #000000;
+        text-align: center;
+      }
+
+      .landing-main-fade-up-139 {
+        position: absolute;
+        top: 139px;
+        width: 100%;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 26px;
+      }
+
+      .landing-main-fade-up-229 {
+        position: absolute;
+        top: 229px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-size: 15px;
+      }
+
+      .landing-main-fade-up-273 {
+        position: absolute;
+        top: 273px;
+        width: 100%;
+        right: 5px;
+        z-index: 1;
+      }
+
+      .landing-main-fade-up-327 {
+        position: absolute;
+        width: 100%;
+        top: 327.55px;
+      }
+
+      .landing-main-container3 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 537px;
+      }
+
+      .landing-main-fade-up-100 {
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 26px;
+      }
+
+      .landing-main-fade-up-190 {
+        position: absolute;
+        top: 190px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-size: 15px;
+      }
+
+      .landing-main-fade-up-279 {
+        position: absolute;
+        top: 279px;
+        width: 100%;
+      }
+
+      .landing-main-container4 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 598px;
+      }
+
+      .landing-main-fade-up-100-1 {
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 26px;
+      }
+
+      .landing-main-fade-up-190-1 {
+        position: absolute;
+        top: 190px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-size: 15px;
+      }
+
+      .landing-main-fade-up-279-1 {
+        position: absolute;
+        width: 100%;
+        right: 40px;
+        top: 279px;
+      }
+
+      .landing-main-fade-up-350 {
+        position: absolute;
+        text-align: right;
+        width: 100%;
+        right: 50px;
+        top: 350px;
+      }
+
+      .landing-main-fade-up-403 {
+        position: absolute;
+        width: 100%;
+        right: 30px;
+        top: 403px;
+      }
+
+      .landing-main-fade-up-492 {
+        position: absolute;
+        text-align: right;
+        width: 100%;
+        right: 50px;
+        top: 492px;
+      }
+
+      .landing-main-container5 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 768px;
+      }
+
+      .landing-main-fade-up-60-1 {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 30px;
+        /* or 140% */
+
+        text-align: center;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-201-1 {
+        position: absolute;
+        z-index: 1;
+        right: 5px;
+        height: 484.9px;
+        width: 100%;
+        top: 256px;
+      }
+
+      .landing-main-fade-up-310 {
+        position: absolute;
+        width: 335px;
+        height: 725.83px;
+
+        width: 100%;
+        top: 310px;
+      }
+
+      .landing-main-container6 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 1270px;
+        background-color: #fffaf5;
+      }
+
+      .landing-main-fade-up-40 {
+        position: absolute;
+        width: 100%;
+        top: 40px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 20px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-96 {
+        position: absolute;
+        width: 100%;
+        top: 96px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 18px;
+
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-180 {
+        position: absolute;
+        width: 100%;
+        top: 180px;
+      }
+
+      .landing-main-fade-up-450 {
+        position: absolute;
+        width: 100%;
+        top: 450px;
+      }
+
+      .landing-main-fade-up-723 {
+        position: absolute;
+        width: 100%;
+        top: 723px;
+      }
+
+      .landing-main-fade-up-973 {
+        position: absolute;
+        width: 100%;
+        top: 973px;
+      }
+
+      .landing-main-container7 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 475px;
+      }
+
+      .landing-main-fade-up-70 {
+        position: absolute;
+        width: 100%;
+        top: 70px;
+
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 26px;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-132 {
+        position: absolute;
+        width: 100%;
+        top: 132px;
+
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 15px;
+        color: #000000;
+      }
+
+      .landing-main-fade-up-208 {
+        position: absolute;
+        width: 100%;
+        top: 208px;
+      }
+
+      .landing-main-fade-up-329 {
+        position: absolute;
+        width: 100%;
+        top: 329px;
+      }
+
+      .landing-main-fade-up-211 {
+        position: absolute;
+        width: 100%;
+        top: 225px;
+        right: 60px;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 16px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-251 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 251px;
+        right: 60px;
+
+        font-family: Pretendard;
+
+        font-size: 13px;
+        line-height: 20px;
+        /* or 154% */
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-332 {
+        position: absolute;
+        width: 100%;
+        top: 345px;
+        right: 65px;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 16px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-355 {
+        position: absolute;
+        /* text-align: left; */
+        /* display: block; */
+        width: 100%;
+        top: 375px;
+        right: 60px;
+        /* left: 60px; */
+
+        font-family: Pretendard;
+        font-size: 13px;
+
+        color: #513f35;
+      }
+
+      .landing-main-container8 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 495px;
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-fade-up-40 {
+        position: absolute;
+        width: 100%;
+        top: 40px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 22px;
+        /* or 154% */
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-40-1 {
+        position: absolute;
+        width: 100%;
+        top: 40px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 22px;
+        /* or 154% */
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-accordian {
+        position: relative;
+        top: 118px;
+        width: 100%;
+
+        margin: auto;
+      }
+
+      .landing-main-fade-up-title {
+        text-align: left;
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .landing-main-fade-up-title-Q {
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 14px;
+
+        color: #ec5800;
+      }
+
+      .landing-main-fade-up-comment {
+        padding: 20px;
+        text-align: left;
+        font-family: Pretendard;
+
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      button.accordion {
+        background-color: #fff;
+        cursor: pointer;
+        width: 80%;
+        height: 60px;
+        /* text-align: center; */
+        border: none;
+        font-size: 16px;
+        transition: 0.5s;
+        /* text-align: left; */
+        padding: 10px;
+      }
+
+      button.accordion:after {
+        background-image: url("images/arrow_closed.png");
+        background-size: 18px 18px;
+
+        display: inline-block;
+        /* width: 18px; */
+        height: 18px;
+        content: "";
+        /* float: right; */
+        position: relative;
+        top: 18px;
+      }
+
+      button.accordion.active:after {
+        background-image: url("images/arrow_opened.png");
+        content: "";
+      }
+
+      div.panel {
+        margin: auto;
+        text-align: center;
+
+        width: 80%;
+        background-color: #fef7f2;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        border-top: 1px solid #f0f0f0;
+        /* color:#666666; */
+      }
+
+      .landing-main-container9 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 400px;
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-fade-up-30 {
+        position: absolute;
+        width: 100%;
+        top: 30px;
+
+        font-family: Spoqa Han Sans Neo;
+        font-weight: bold;
+        font-size: 22px;
+        color: #211f1f;
+      }
+
+      .landing-main-fade-up-134 {
+        position: absolute;
+        width: 100%;
+        top: 134px;
+      }
+
+      .landing-main-container-10 {
+        position: relative;
+        width: 100%;
+        height: 323px;
+
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-container-contents {
+        position: relative;
+        width: 90%;
+        top: 60px;
+        left: 20px;
+        /* padding: auto; */
+        background-color: blue;
+      }
+
+      .landing-main-container-contents-01 {
+        position: absolute;
+        font-family: Pretendard;
+
+        font-size: 13px;
+        font-weight: 600;
+        color: #666666;
+      }
+
+      .landing-main-container-contents-img {
+        position: absolute;
+        top: 66px;
+      }
+
+      .landing-main-container-contents-02 {
+        position: absolute;
+        top: 106px;
+        font-family: Pretendard;
+        font-size: 14px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-03 {
+        position: absolute;
+        top: 146px;
+
+        font-family: Pretendard;
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-04 {
+        position: absolute;
+        top: 167px;
+
+        font-family: Pretendard;
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-05 {
+        position: absolute;
+
+        top: 188px;
+
+        font-family: Pretendard;
+
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-responsive-image {
+        width: 184.59px;
+        height: 399.95px;
+      }
+
+      .landing-main-responsive-image2 {
+        width: 184.59px;
+        height: 399.95px;
+      }
+
+      .footer {
+        position: fixed;
+        text-align: center;
+        /* left:0px;  */
+        z-index: 2;
+        bottom: 30px;
+        height: 60px;
+        width: 100%;
+        padding: auto;
+      }
+    }
+
+    @media screen and (min-width: 1020px) and (max-width: 1439px) {
+      html {
+        font-family: sans-serif;
+        /* background-color: gray; */
+      }
+
+      body {
+        max-width: 1440px;
+        margin: 0 auto;
+        background-color: white;
+      }
+
+      .landing-main-image {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        width
+        /***/
+        : auto;
+        /* only IE8 */
+        height: auto;
+        /* vertical-align: bottom; */
+      }
+
+      .landing-main-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: #beb0a7;
+      }
+
+      .landing-main-fade-up-80 {
+        position: absolute;
+        width: 164px;
+        height: 38px;
+        top: 80px;
+        left: 20px;
+      }
+
+      .landing-main-fade-up-95 {
+        position: absolute;
+        top: 108px;
+        left: 20px;
+
+        color: white;
+        font-size: 44px;
+        font-family: Pretendard;
+        font-weight: bold;
+      }
+
+      .landing-main-fade-up-140 {
+        position: absolute;
+        top: 169px;
+        left: 20px;
+        color: white;
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 44px;
+      }
+
+      .landing-main-fade-up-205 {
+        position: absolute;
+        top: 287px;
+        left: 20px;
+
+        font-family: Pretendard;
+        font-size: 18px;
+        color: #ffffff;
+      }
+
+      .landing-main-fade-up-225 {
+        position: absolute;
+        top: 317px;
+        left: 20px;
+
+        font-family: Pretendard;
+        font-size: 18px;
+        color: #ffffff;
+      }
+
+      .beo-main-slider-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slideshow-container {
+        position: relative;
+        animation: slide 1s infinite;
+        width: 100%;
+        min-height: 288px;
+        overflow: hidden;
+        background-color: #beb0a7;
+        text-align: center;
+      }
+
+      .dotContainer {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .leftShow {
+        position: absolute;
+        width: 100%;
+        display: block;
+        animation-name: left;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      .rightShow {
+        position: absolute;
+        width: 100%;
+        display: block;
+        animation-name: right;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      @keyframes left {
+        0% {
+          left: 100%;
+        }
+
+        100% {
+          left: 0%;
+        }
+      }
+
+      @keyframes right {
+        0% {
+          left: -100%;
+        }
+
+        100% {
+          left: 0%;
+        }
+      }
+
+      /* The dots/bullets/indicators */
+      .dot {
+        cursor: pointer;
+        height: 8px;
+        width: 8px;
+        margin: 0 2px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+      }
+
+      .active {
+        background-color: #ec5800;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .slider__item {
+        width: 100%;
+        text-align: center;
+      }
+
+      .slider-title {
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        text-align: center;
+        color: #45332f;
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .slider-comment {
+        position: absolute;
+        top: 90px;
+        width: 100%;
+        text-align: center;
+        white-space: pre-line;
+        color: #ffffff;
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .slider-name {
+        position: absolute;
+        width: 100%;
+        top: 178px;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 12px;
+      }
+
+      .landing-main-container2 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 758px;
+      }
+
+      .landing-main-fade-up-60 {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        font-family: Pretendard;
+        font-size: 16px;
+        color: #000000;
+        text-align: center;
+      }
+
+      .landing-main-fade-up-139 {
+        position: absolute;
+        top: 139px;
+        width: 100%;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 26px;
+      }
+
+      .landing-main-fade-up-229 {
+        position: absolute;
+        top: 229px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-size: 15px;
+      }
+
+      .landing-main-fade-up-273 {
+        position: absolute;
+        top: 273px;
+        right: 5px;
+        width: 100%;
+        z-index: 1;
+      }
+
+      .landing-main-fade-up-327 {
+        position: absolute;
+        top: 327.55px;
+        width: 100%;
+      }
+
+      .landing-main-container3 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 537px;
+      }
+
+      .landing-main-fade-up-100 {
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 26px;
+      }
+
+      .landing-main-fade-up-190 {
+        position: absolute;
+        top: 190px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-size: 15px;
+      }
+
+      .landing-main-fade-up-279 {
+        position: absolute;
+        top: 279px;
+        width: 100%;
+      }
+
+      .landing-main-container4 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 598px;
+      }
+
+      .landing-main-fade-up-100-1 {
+        position: absolute;
+        top: 100px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 26px;
+      }
+
+      .landing-main-fade-up-190-1 {
+        position: absolute;
+        top: 190px;
+        width: 100%;
+        font-family: Pretendard;
+
+        font-size: 15px;
+      }
+
+      .landing-main-fade-up-279-1 {
+        position: absolute;
+        width: 100%;
+        right: 40px;
+        top: 279px;
+      }
+
+      .landing-main-fade-up-350 {
+        position: absolute;
+        text-align: right;
+        width: 100%;
+        right: 300px;
+        top: 350px;
+      }
+
+      .landing-main-fade-up-403 {
+        position: absolute;
+        width: 100%;
+        right: 30px;
+        top: 403px;
+      }
+
+      .landing-main-fade-up-492 {
+        position: absolute;
+        text-align: right;
+        width: 30%;
+        right: 300px;
+        top: 492px;
+      }
+
+      .landing-main-container5 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 768px;
+      }
+
+      .landing-main-fade-up-60-1 {
+        position: absolute;
+        width: 100%;
+        top: 60px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 30px;
+        /* or 140% */
+
+        text-align: center;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-201-1 {
+        position: absolute;
+        z-index: 1;
+        right: 5px;
+        height: 484.9px;
+        width: 100%;
+        top: 256px;
+      }
+
+      .landing-main-fade-up-310 {
+        position: absolute;
+        height: 399.94px;
+        width: 100%;
+        top: 310px;
+      }
+
+      .landing-main-container6 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 1270px;
+        background-color: #fffaf5;
+      }
+
+      .landing-main-fade-up-40 {
+        position: absolute;
+        width: 100%;
+        top: 40px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 20px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-96 {
+        position: absolute;
+        width: 100%;
+        top: 96px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 18px;
+
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-180 {
+        position: absolute;
+        width: 100%;
+        top: 180px;
+      }
+
+      .landing-main-fade-up-450 {
+        position: absolute;
+        width: 100%;
+        top: 450px;
+      }
+
+      .landing-main-fade-up-723 {
+        position: absolute;
+        width: 100%;
+        top: 723px;
+      }
+
+      .landing-main-fade-up-973 {
+        position: absolute;
+        width: 100%;
+        top: 973px;
+      }
+
+      .landing-main-container7 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 475px;
+      }
+
+      .landing-main-fade-up-70 {
+        position: absolute;
+        width: 100%;
+        top: 70px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 26px;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-132 {
+        position: absolute;
+        width: 100%;
+        top: 132px;
+
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 15px;
+        color: #000000;
+      }
+
+      .landing-main-fade-up-208 {
+        position: absolute;
+        width: 100%;
+        top: 208px;
+      }
+
+      .landing-main-fade-up-329 {
+        position: absolute;
+        width: 100%;
+        top: 329px;
+      }
+
+      .landing-main-fade-up-211 {
+        position: absolute;
+        width: 100%;
+        top: 225px;
+        right: 60px;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 16px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-251 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 251px;
+        right: 60px;
+
+        font-family: Pretendard;
+
+        font-size: 13px;
+        line-height: 20px;
+        /* or 154% */
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-332 {
+        position: absolute;
+        width: 100%;
+        top: 345px;
+        right: 65px;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 16px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-355 {
+        position: absolute;
+        /* text-align: left; */
+        /* display: block; */
+        width: 100%;
+        top: 375px;
+        right: 60px;
+        /* left: 60px; */
+
+        font-family: Pretendard;
+        font-size: 13px;
+
+        color: #513f35;
+      }
+
+      .landing-main-container8 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 495px;
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-fade-up-40 {
+        position: absolute;
+        width: 100%;
+        top: 40px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 22px;
+        /* or 154% */
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-40-1 {
+        position: absolute;
+        width: 100%;
+        top: 40px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 22px;
+        /* or 154% */
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-accordian {
+        position: relative;
+        top: 118px;
+        width: 100%;
+
+        margin: auto;
+      }
+
+      .landing-main-fade-up-title {
+        text-align: left;
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .landing-main-fade-up-title-Q {
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 14px;
+
+        color: #ec5800;
+      }
+
+      .landing-main-fade-up-comment {
+        padding: 20px;
+        text-align: left;
+        font-family: Pretendard;
+
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      button.accordion {
+        background-color: #fff;
+        cursor: pointer;
+        width: 80%;
+        height: 60px;
+        /* text-align: center; */
+        border: none;
+        font-size: 16px;
+        transition: 0.5s;
+        /* text-align: left; */
+        padding: 10px;
+      }
+
+      button.accordion:after {
+        background-image: url("images/arrow_closed.png");
+        background-size: 18px 18px;
+
+        display: inline-block;
+        /* width: 18px; */
+        height: 18px;
+        content: "";
+        /* float: right; */
+        position: relative;
+        top: 18px;
+      }
+
+      button.accordion.active:after {
+        background-image: url("images/arrow_opened.png");
+        content: "";
+      }
+
+      div.panel {
+        margin: auto;
+        text-align: center;
+
+        width: 80%;
+        background-color: #fef7f2;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        border-top: 1px solid #f0f0f0;
+        /* color:#666666; */
+      }
+
+      .landing-main-container9 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 400px;
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-fade-up-30 {
+        position: absolute;
+        width: 100%;
+        top: 30px;
+
+        font-family: Spoqa Han Sans Neo;
+        font-weight: bold;
+        font-size: 22px;
+        color: #211f1f;
+      }
+
+      .landing-main-fade-up-134 {
+        position: absolute;
+        width: 100%;
+        top: 134px;
+      }
+
+      .landing-main-container-10 {
+        position: relative;
+        width: 100%;
+        height: 323px;
+
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-container-contents {
+        position: relative;
+        width: 90%;
+        top: 60px;
+        left: 20px;
+        /* padding: auto; */
+        background-color: blue;
+      }
+
+      .landing-main-container-contents-01 {
+        position: absolute;
+        font-family: Pretendard;
+
+        font-size: 13px;
+        font-weight: 600;
+        color: #666666;
+      }
+
+      .landing-main-container-contents-img {
+        position: absolute;
+        top: 66px;
+      }
+
+      .landing-main-container-contents-02 {
+        position: absolute;
+        top: 106px;
+        font-family: Pretendard;
+        font-size: 14px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-03 {
+        position: absolute;
+        top: 146px;
+
+        font-family: Pretendard;
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-04 {
+        position: absolute;
+        top: 167px;
+
+        font-family: Pretendard;
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-05 {
+        position: absolute;
+
+        top: 188px;
+
+        font-family: Pretendard;
+
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-responsive-image {
+        width: 184.59px;
+        height: 399.95px;
+      }
+
+      .landing-main-responsive-image2 {
+        width: 184.59px;
+        height: 399.95px;
+      }
+
+      .footer {
+        position: fixed;
+        text-align: center;
+        z-index: 2;
+        bottom: 30px;
+        height: 60px;
+        width: 100%;
+        padding: auto;
+      }
+    }
+
+    @media screen and (min-width: 1440px) {
+      html {
+        font-family: sans-serif;
+        /* background-color: gray; */
+      }
+
+      body {
+        text-align: center;
+        max-width: 1440px;
+        margin: 0 auto;
+        background-color: white;
+      }
+
+      .landing-main-image {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        width
+        /***/
+        : auto;
+        /* only IE8 */
+        height: auto;
+        /* vertical-align: bottom; */
+      }
+
+      .landing-main-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background-color: #beb0a7;
+      }
+
+      .landing-main-fade-up-80 {
+        position: absolute;
+        width: 164px;
+        height: 38px;
+        top: 199px;
+        left: 227px;
+      }
+
+      .landing-main-fade-up-95 {
+        position: absolute;
+        left: 227px;
+        top: 207px;
+
+        color: white;
+        font-size: 54px;
+        font-family: Pretendard;
+        font-weight: bold;
+      }
+
+      .landing-main-fade-up-140 {
+        position: absolute;
+        left: 227px;
+        top: 292px;
+        color: white;
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 54px;
+      }
+
+      .landing-main-fade-up-205 {
+        position: absolute;
+        left: 227px;
+        top: 422px;
+
+        font-family: Pretendard;
+        font-size: 20px;
+        color: #ffffff;
+      }
+
+      .landing-main-fade-up-225 {
+        position: absolute;
+        left: 227px;
+        top: 454px;
+
+        font-family: Pretendard;
+        font-size: 20px;
+        color: #ffffff;
+      }
+
+      .beo-main-slider-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slideshow-container {
+        position: relative;
+        animation: slide 1s infinite;
+        width: 100%;
+        min-height: 288px;
+        overflow: hidden;
+        background-color: #beb0a7;
+        text-align: center;
+      }
+
+      .dotContainer {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .leftShow {
+        position: absolute;
+        width: 100%;
+        display: block;
+        animation-name: left;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      .rightShow {
+        position: absolute;
+        width: 100%;
+        display: block;
+        animation-name: right;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+      }
+
+      @keyframes left {
+        0% {
+          left: 100%;
+        }
+
+        100% {
+          left: 0%;
+        }
+      }
+
+      @keyframes right {
+        0% {
+          left: -100%;
+        }
+
+        100% {
+          left: 0%;
+        }
+      }
+
+      /* The dots/bullets/indicators */
+      .dot {
+        cursor: pointer;
+        height: 8px;
+        width: 8px;
+        margin: 0 2px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+      }
+
+      .active {
+        background-color: #ec5800;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .slider__item {
+        width: 100%;
+        text-align: center;
+      }
+
+      .slider-title {
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        text-align: center;
+        color: #45332f;
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .slider-comment {
+        position: absolute;
+        top: 90px;
+        width: 100%;
+        text-align: center;
+        white-space: pre-line;
+        color: #ffffff;
+        font-family: "Pretendard";
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      .slider-name {
+        position: absolute;
+        width: 100%;
+        top: 178px;
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 12px;
+      }
+
+      .landing-main-container2 {
+        position: relative;
+        height: 900px;
+      }
+
+      .landing-main-fade-up-60 {
+        position: absolute;
+        /* width: 100%; */
+        left: 230px;
+        top: 80px;
+        font-family: Pretendard;
+        font-size: 24px;
+        color: #000000;
+        /* text-align: center; */
+      }
+
+      .landing-main-fade-up-139 {
+        position: absolute;
+        top: 353px;
+        left: 230px;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 40px;
+      }
+
+      .landing-main-fade-up-229 {
+        position: absolute;
+        top: 497px;
+        left: 230px;
+        font-family: Pretendard;
+
+        font-size: 20px;
+      }
+
+      .landing-main-fade-up-273 {
+        position: absolute;
+        left: 720px;
+
+        z-index: 1;
+      }
+
+      .landing-main-fade-up-327 {
+        position: absolute;
+        left: 804px;
+        top: 99px;
+      }
+
+      .landing-main-container3 {
+        position: relative;
+        height: 520px;
+      }
+
+      .landing-main-fade-up-100 {
+        position: absolute;
+        top: 170px;
+        left: 800px;
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 40px;
+      }
+
+      .landing-main-fade-up-190 {
+        position: absolute;
+        top: 294px;
+        left: 800px;
+        font-family: Pretendard;
+
+        font-size: 20px;
+      }
+
+      .landing-main-fade-up-279 {
+        position: absolute;
+        top: 145px;
+        left: 230px;
+      }
+
+      .landing-main-container4 {
+        position: relative;
+        height: 520px;
+      }
+
+      .landing-main-fade-up-100-1 {
+        position: absolute;
+        left: 230px;
+        top: 170px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 40px;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-190-1 {
+        position: absolute;
+        left: 230px;
+        top: 294px;
+
+        font-family: Pretendard;
+        font-size: 20px;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-279-1 {
+        position: absolute;
+        left: 816px;
+        top: 132px;
+      }
+
+      .landing-main-fade-up-350 {
+        position: absolute;
+        left: 1149px;
+        top: 204px;
+      }
+
+      .landing-main-fade-up-403 {
+        position: absolute;
+        left: 816px;
+        top: 256px;
+      }
+
+      .landing-main-fade-up-492 {
+        position: absolute;
+        left: 1159px;
+        top: 350px;
+      }
+
+      .landing-main-container5 {
+        position: relative;
+        height: 980px;
+      }
+
+      .landing-main-fade-up-60-1 {
+        position: absolute;
+        left: 800px;
+        top: 280px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 48px;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-201-1 {
+        position: absolute;
+        z-index: 1;
+
+        left: 230px;
+      }
+
+      .landing-main-fade-up-310 {
+        position: absolute;
+        left: 314px;
+        top: 99px;
+      }
+
+      .landing-main-container6 {
+        position: relative;
+        height: 739px;
+        background-color: #fffaf5;
+      }
+
+      .landing-main-fade-up-40 {
+        position: absolute;
+        left: 231px;
+        top: 100px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 28px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-96 {
+        position: absolute;
+        left: 230px;
+        top: 154px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 18px;
+
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-180 {
+        position: absolute;
+        left: 540px;
+        top: 32px;
+      }
+
+      .landing-main-fade-up-450 {
+        position: absolute;
+        left: 890px;
+        top: 83px;
+      }
+
+      .landing-main-fade-up-723 {
+        position: absolute;
+        left: 540px;
+        top: 349px;
+      }
+
+      .landing-main-fade-up-973 {
+        position: absolute;
+        left: 890px;
+        top: 400px;
+      }
+
+      .landing-main-container7 {
+        position: relative;
+        height: 555px;
+      }
+
+      .landing-main-fade-up-70 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 100px;
+
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 48px;
+
+        color: #000000;
+      }
+
+      .landing-main-fade-up-132 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 179px;
+
+        font-family: Pretendard;
+
+        font-size: 24px;
+        color: #000000;
+      }
+
+      .landing-main-fade-up-208 {
+        position: absolute;
+        left: 230px;
+        top: 257px;
+      }
+
+      .landing-main-fade-up-329 {
+        position: absolute;
+        left: 740px;
+        top: 257px;
+      }
+
+      .landing-main-fade-up-211 {
+        position: absolute;
+        left: 260px;
+        top: 292px;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 24px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-251 {
+        position: absolute;
+        left: 260px;
+        top: 331px;
+
+        font-family: Pretendard;
+
+        font-size: 18px;
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-332 {
+        position: absolute;
+        left: 770px;
+        top: 292px;
+
+        font-family: Pretendard;
+
+        font-weight: bold;
+        font-size: 24px;
+        color: #49382e;
+      }
+
+      .landing-main-fade-up-355 {
+        position: absolute;
+        left: 770px;
+        top: 331px;
+
+        font-family: Pretendard;
+        font-size: 18px;
+
+        color: #513f35;
+      }
+
+      .landing-main-container8 {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        height: 501px;
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-fade-up-40-1 {
+        position: absolute;
+        width: 100%;
+        top: 56px;
+
+        font-family: Spoqa Han Sans Neo;
+        font-weight: bold;
+        font-size: 30px;
+        /* or 154% */
+
+        color: #513f35;
+      }
+
+      .landing-main-fade-up-accordian {
+        position: relative;
+        top: 118px;
+        width: 60%;
+
+        margin: auto;
+      }
+
+      .landing-main-fade-up-title {
+        text-align: left;
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .landing-main-fade-up-title-Q {
+        font-family: Pretendard;
+        font-weight: bold;
+        font-size: 14px;
+
+        color: #ec5800;
+      }
+
+      .landing-main-fade-up-comment {
+        padding: 20px;
+        text-align: left;
+        font-family: Pretendard;
+
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      button.accordion {
+        background-color: #fff;
+        cursor: pointer;
+        width: 80%;
+        height: 60px;
+        /* text-align: center; */
+        border: none;
+        font-size: 16px;
+        transition: 0.5s;
+        /* text-align: left; */
+        padding: 10px;
+      }
+
+      button.accordion:after {
+        background-image: url("images/arrow_closed.png");
+        background-size: 18px 18px;
+
+        display: inline-block;
+        /* width: 18px; */
+        height: 18px;
+        content: "";
+        /* float: right; */
+        position: relative;
+        top: 18px;
+      }
+
+      button.accordion.active:after {
+        background-image: url("images/arrow_opened.png");
+        content: "";
+      }
+
+      div.panel {
+        margin: auto;
+        text-align: center;
+
+        width: 80%;
+        background-color: #fef7f2;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        border-top: 1px solid #f0f0f0;
+        /* color:#666666; */
+      }
+
+      .landing-main-container9 {
+        position: relative;
+        width: 100%;
+        height: 519px;
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-fade-up-30 {
+        position: absolute;
+        left: 230px;
+        top: 89px;
+
+        font-family: Spoqa Han Sans Neo;
+        font-weight: bold;
+        font-size: 38px;
+        color: #211f1f;
+      }
+
+      .landing-main-fade-up-134 {
+        position: absolute;
+        left: 230px;
+        top: 269px;
+      }
+
+      .landing-main-container-10 {
+        position: relative;
+        height: 415px;
+
+        background-color: #f8f8f8;
+      }
+
+      .landing-main-container-contents {
+        position: relative;
+        width: 90%;
+        top: 100px;
+        left: 233px;
+      }
+
+      .landing-main-container-contents-01 {
+        position: absolute;
+        font-family: Pretendard;
+
+        font-size: 13px;
+        font-weight: 600;
+        color: #666666;
+      }
+
+      .landing-main-container-contents-img {
+        position: absolute;
+        top: 66px;
+      }
+
+      .landing-main-container-contents-02 {
+        position: absolute;
+        top: 106px;
+        font-family: Pretendard;
+        font-size: 14px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-03 {
+        position: absolute;
+        top: 146px;
+
+        font-family: Pretendard;
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-04 {
+        position: absolute;
+        top: 167px;
+
+        font-family: Pretendard;
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-container-contents-05 {
+        position: absolute;
+
+        top: 188px;
+
+        font-family: Pretendard;
+
+        font-size: 12px;
+
+        color: #888888;
+      }
+
+      .landing-main-responsive-image {
+        position: relative;
+        width: 335px;
+        height: 725px;
+
+      }
+
+      .landing-main-responsive-image2 {
+        position: relative;
+        width: 335px;
+        height: 725.83px;
+      }
+
+      .footer {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header">
+      <img class="header-left" src="images/beo_logo.png" alt="beo logo"></img>
+      <span class="header-right"> 로그인</span>
+
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="landing-main-container">
+        <picture>
+          <source media="(min-width: 360px) and (max-width: 1019px)" srcset="images/main_image.png" />
+          <source media="(min-width: 1020px) and (max-width: 1439px) " srcset="images/main_image2.png" />
+          <source media="(min-width: 1440px) " srcset="images/main_image3.png" />
+
+          <img class="landing-main-image" style="width: 100%" src="images/main_image.png" alt="Main image" />
+        </picture>
+
+        <div class="landing-main-fade-up-80" data-aos="fade-up">
+          <img src="images/kakao_img.png" />
+        </div>
+
+        <div class="landing-main-fade-up-95" data-aos="fade-up">
+          <p>선물 고민중인가요?</p>
+        </div>
+        <div class="landing-main-fade-up-140" data-aos="fade-up">
+          <p>1분이면 충분해요!</p>
+        </div>
+        <div class="landing-main-fade-up-205" data-aos="fade-up">
+          <p>200만건 이상의 선물 데이터를 분석했어요.</p>
+        </div>
+        <div class="landing-main-fade-up-225" data-aos="fade-up">
+          <p>내게 꼭 맞는 선물 추천을 받아보세요.</p>
+        </div>
+      </div>
+
+      <section>
+        <div class="beo-main-slider-container" data-aos="fade-up">
+          <div class="slideshow-container">
+            <div class="main-slides rightShow">
+              <div class="slider__item">
+                <p class="slider-title">이런 고민 많았죠?</p>
+                <br />
+                <div class="slider-comment">
+                  뭘 좋아할지 몰라 네**, 인***램에서
+                  <div>몇 시간을 허비했는지 몰라요</div>
+                </div>
+                <p class="slider-name">30대 서울 직장인 김*성님</p>
+              </div>
+            </div>
+            <div class="main-slides hide">
+              <div class="slider__item">
+                <p class="slider-title"></p>
+                <br />
+                <div class="slider-comment">
+                  선물 추천을 받고 싶어 검색해도
+                  <div>온통 광고. 믿을 수가 없어요.</div>
+                </div>
+                <p class="slider-name">20대 인천 대학생 오* 연님</p>
+              </div>
+            </div>
+            <div class="main-slides hide">
+              <div class="slider__item">
+                <p class="slider-title"></p>
+                <br />
+                <div class="slider-comment">
+                  부모님 선물 찾다가 어려워서
+                  <div>역시 현금이 최고라고 합리화해 버리곤 해요</div>
+                </div>
+                <p class="slider-name">40대 대구 자영업자 이*영님</p>
+              </div>
+            </div>
+          </div>
+          <div class="dotContainer">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="landing-main-container2">
+        <div class="landing-main-fade-up-60" data-aos="fade-up">
+          <div>선물 전문가 베오가 도와드릴게요.</div>
+        </div>
+        <div class="landing-main-fade-up-139" data-aos="fade-up">
+          <div>1분</div>
+          <div>선물 추천</div>
+        </div>
+        <div class="landing-main-fade-up-229" data-aos="fade-up">
+          <div>몇 시간씩 인터넷 검색에 시간 허비할 필요 없어요.</div>
+          <div>몇 가지 질문에 답해주시면, 선물을 추천해드려요.</div>
+        </div>
+        <div class="landing-main-fade-up-273" data-aos="fade-up">
+          <picture>
+            <source media="(min-width: 1440px) " style="width: 100%; height: 519px" srcset="images/beo_frame_03.png" />
+
+            <img src="images/beo_frame.png" alt="Main image" />
+          </picture>
+        </div>
+        <div class="landing-main-fade-up-327" data-aos="fade-up">
+          <picture>
+            <source media="(min-width: 1440px) " class="landing-main-responsive-image" srcset="images/beo_gif_01.gif" />
+
+            <img src="images/beo_gif_01.gif" class="landing-main-responsive-image" />
+          </picture>
+        </div>
+      </div>
+      <div class="landing-main-container3">
+        <div class="landing-main-fade-up-100" data-aos="fade-up">
+          <div>광고 없는</div>
+          <div>선물 추천</div>
+        </div>
+        <div class="landing-main-fade-up-190" data-aos="fade-up">
+          <div>광고일까 더 이상 고민하지 마세요.</div>
+          <div>베오의 선물 추천에는 광고가 없습니다.</div>
+        </div>
+        <div class="landing-main-fade-up-279" data-aos="fade-up">
+          <picture>
+            <source media="(min-width: 1440px) " style="width: 100%; height: 519px" srcset="images/no_ads_03.png" />
+
+            <img src="images/no_ads.png" alt="Main image" />
+          </picture>
+        </div>
+      </div>
+
+      <div class="landing-main-container4">
+        <div class="landing-main-fade-up-100-1" data-aos="fade-up">
+          <div>취향을 반영한</div>
+          <div>선물 추천</div>
+        </div>
+        <div class="landing-main-fade-up-190-1" data-aos="fade-up">
+          <div>받는 분의 취향을 고려해서 선물을 추천해드려요.</div>
+          <div>당신에게 딱 맞는 선물로 고르고 골랐어요.</div>
+        </div>
+
+        <div>
+          <div class="landing-main-fade-up-279-1" data-aos="fade-up">
+            <picture>
+              <source media="(min-width: 1440px) " style="width: 100%; height: 519px"
+                srcset="images/beo_chat01_03.png" />
+
+              <img src="images/beo_chat01.png" alt="Main image" />
+            </picture>
+          </div>
+          <div class="landing-main-fade-up-350" data-aos="fade-up">
+            <picture>
+              <source media="(min-width: 1440px) " style="width: 100%; height: 519px"
+                srcset="images/beo_chat02_03.png" />
+
+              <img src="images/beo_chat02.png" alt="Main image" />
+            </picture>
+          </div>
+          <div class="landing-main-fade-up-403" data-aos="fade-up">
+            <picture>
+              <source media="(min-width: 1440px) " style="width: 100%; height: 519px"
+                srcset="images/beo_chat03_03.png" />
+
+              <img src="images/beo_chat03.png" alt="Main image" />
+            </picture>
+          </div>
+          <div class="landing-main-fade-up-492" data-aos="fade-up">
+            <picture>
+              <source media="(min-width: 1440px) " style="width: 100%; height: 519px"
+                srcset="images/beo_chat04_03.png" />
+
+              <img src="images/beo_chat04.png" alt="Main image" />
+            </picture>
+          </div>
+        </div>
+      </div>
+
+      <div class="landing-main-container5">
+        <div class="landing-main-fade-up-60-1" data-aos="fade-up">
+          <div>당신만을 위한</div>
+          <div>선물 제안서가</div>
+          <div>도착했어요</div>
+        </div>
+
+        <div class="landing-main-fade-up-201-1" data-aos="fade-up">
+          <picture>
+            <source media="(min-width: 1440px) " style="width: 100%; height: 519px" srcset="images/beo_frame_03.png" />
+
+            <img src="images/beo_frame.png" alt="Main image" />
+          </picture>
+        </div>
+        <div class="landing-main-fade-up-310" data-aos="fade-up">
+
+
+          <picture>
+            <source media="(min-width: 1440px) " class="landing-main-responsive-image2"
+              srcset="images/beo_gif_02.gif" />
+
+            <img src="images/beo_gif_02.gif" class="landing-main-responsive-image2" />
+          </picture>
+
+
+
+
+
+
+
+        </div>
+      </div>
+
+      <div class="landing-main-container6">
+        <div class="landing-main-fade-up-40" data-aos="fade-up">
+          <div>후기로 보는 베오</div>
+        </div>
+        <div class="landing-main-fade-up-96" data-aos="fade-up">
+          <div>베오 덕에</div>
+          <div>행복한 시간을 보냈어요.</div>
+        </div>
+
+        <div>
+          <div class="landing-main-fade-up-180" data-aos="fade-up">
+            <img src="images/beo_review01.png" />
+          </div>
+          <div class="landing-main-fade-up-450" data-aos="fade-up">
+            <img src="images/beo_review02.png" />
+          </div>
+          <div class="landing-main-fade-up-723" data-aos="fade-up">
+            <img src="images/beo_review03.png" />
+          </div>
+          <div class="landing-main-fade-up-973" data-aos="fade-up">
+            <img src="images/beo_review04.png" />
+          </div>
+        </div>
+      </div>
+
+      <div class="landing-main-container7">
+        <div class="landing-main-fade-up-70" data-aos="fade-up">
+          <div>선물 연구소</div>
+        </div>
+        <div class="landing-main-fade-up-132" data-aos="fade-up">
+          <div>좋은 선물에 대해서 고민하고 연구합니다.</div>
+        </div>
+
+        <div class="landing-main-fade-up-208" data-aos="fade-up">
+          <picture>
+            <source media="(min-width: 1440px) " style="width: 100%; height: 519px" srcset="images/backimage1_03.png" />
+
+            <img src="images/backimage1.png" alt="Main image" />
+          </picture>
+        </div>
+        <div class="landing-main-fade-up-211" data-aos="fade-up">
+          상품자체 검증 프로세스
+        </div>
+        <div class="landing-main-fade-up-251" data-aos="fade-up">
+          <div>5단계 검증 프로세스를 통해</div>
+          <div>선별한 차별화된 상품 데이터</div>
+        </div>
+
+        <div data-aos="fade-up">
+          <div class="landing-main-fade-up-329">
+            <picture>
+              <source media="(min-width: 1440px) " style="width: 100%; height: 519px"
+                srcset="images/backimage2_03.png" />
+
+              <img src="images/backimage2.png" alt="Main image" />
+            </picture>
+          </div>
+          <div class="landing-main-fade-up-332">개인화 추천 알고리즘</div>
+          <div class="landing-main-fade-up-355">
+            <div>선물 상황, 개인의 성향까지</div>
+            <div>반영할 수 있는 추천 알고리즘</div>
+          </div>
+        </div>
+      </div>
+      <div class="landing-main-container8">
+        <div class="landing-main-fade-up-40-1" data-aos="fade-up">
+          <div>FAQ</div>
+        </div>
+
+        <div class="landing-main-fade-up-accordian" data-aos="fade-up">
+          <button class="accordion active">
+            <div class="landing-main-fade-up-title">
+              <span class="landing-main-fade-up-title-Q">Q</span> 선물 추천은
+              무료인가요?
+            </div>
+          </button>
+          <div class="panel">
+            <div class="landing-main-fade-up-comment">
+              <div>네 물론입니다.</div>
+              <div>
+                베오의 모든 서비스는 무료로 제공되니 편하게 선물 제안서
+                받아보세요.
+              </div>
+            </div>
+          </div>
+          <button class="accordion">
+            <div class="landing-main-fade-up-title">
+              <span class="landing-main-fade-up-title-Q">Q</span> 선물 받는
+              분이 정말 만족할까요?
+            </div>
+          </button>
+          <div class="panel">
+            <div class="landing-main-fade-up-comment">
+              수많은 선물 경험과 아이디어를 가진 선물 매니저들이 깐깐하게
+              선별한 아이템들을 개인화 추천 알고리즘을 통해 추천드리니 걱정
+              마세요.
+            </div>
+          </div>
+          <button class="accordion">
+            <div class="landing-main-fade-up-title">
+              <span class="landing-main-fade-up-title-Q">Q</span> 광고 없는
+              추천은 뭐가 좋은거죠?
+            </div>
+          </button>
+          <div class="panel">
+            <div class="landing-main-fade-up-comment">
+              광고가 없기에 오직 최적의 선물을 추천드리는 것에만 집중할 수
+              있습니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="landing-main-container9">
+        <picture>
+          <source media="(min-width: 360px) and (max-width: 1019px)" srcset="images/beo_bg01.png" />
+          <source media="(min-width: 1020px) and (max-width: 1439px) " style="width: 100%; height: 400px"
+            srcset="images/beo_bg02.png" />
+          <source media="(min-width: 1440px) " style="width: 100%; height: 519px" srcset="images/beo_bg03.png" />
+
+          <img style="width: 100%" src="images/beo_bg01.png" alt="Main image" />
+        </picture>
+
+        <div class="landing-main-fade-up-30" data-aos="fade-up">
+          <div>베오와 함께라면</div>
+          <div>당신의 기념일이</div>
+          <div>새로워질 거예요</div>
+        </div>
+        <div class="landing-main-fade-up-134" data-aos="fade-up">
+          <picture>
+            <source media="(min-width: 1440px) " style="width: 100%; height: 519px"
+              srcset="images/beo_req_button_03.png" />
+
+            <img src="images/beo_req_button.png" alt="Main image" />
+          </picture>
+        </div>
+      </div>
+
+      <div class="landing-main-container-10">
+        <div class="landing-main-container-contents">
+          <div class="landing-main-container-contents-01">
+            <span>회사소개 </span>|<span> 이용약관 </span>|<span>
+              개인정보처리방침 </span>|<span> 선물연구소</span>
+          </div>
+          <div class="landing-main-container-contents-img">
+            <img src="images/beo_logo_gray.png" />
+          </div>
+
+          <p class="landing-main-container-contents-02">(주)비타브리비스</p>
+          <div class="landing-main-container-contents-03">
+            <span>사업자등록번호 : 781-86-02377</span><span>대표 윤화식</span>
+          </div>
+          <div class="landing-main-container-contents-04">
+            <span>통신판매업신고번호 : 제2021-서울금천-1982호</span>
+            <span>사업자정보 확인</span>
+          </div>
+          <div class="landing-main-container-contents-05">
+            이메일 : help@vitabrevis.ai
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="footer">
+    <picture>
+      <source media="(min-width: 1020px) " style="width: 100%; height: 519px" srcset="images/gift_button_02.png" />
+
+      <img src="images/gift_button.png" alt="Main image" />
+    </picture>
+  </div>
+</body>
+
+<script>
+  class Swipe {
+    constructor(elem, options = {}) {
+      this.elem = elem;
+      this.minDistance = options.minDistance || 100;
+      this.maxTime = options.maxTime || 500;
+      this.corners = options.corners || false;
+      this.addListeners();
+      this.events = {
+        live: [],
+        after: [],
+      };
+      Swipe.directions().forEach(
+        (direction) => (this.events[direction] = [])
+      );
+    }
+
+    static directions() {
+      return [
+        "left",
+        "right",
+        "up",
+        "down",
+        "leftup",
+        "leftdown",
+        "rightup",
+        "rightdown",
+      ];
+    }
+
+    static position(e) {
+      return { x: e.pageX, y: e.pageY };
+    }
+
+    static getOffsets(e, startPos) {
+      const newPos = Swipe.position(e);
+      return {
+        x: newPos.x - startPos.x,
+        y: newPos.y - startPos.y,
+      };
+    }
+
+    static getDirections(offsets, corners) {
+      const directions = {};
+      directions.left = offsets.x <= 0 ? Math.abs(offsets.x) : 0;
+      directions.right = offsets.x >= 0 ? Math.abs(offsets.x) : 0;
+      directions.up = offsets.y <= 0 ? Math.abs(offsets.y) : 0;
+      directions.down = offsets.y >= 0 ? Math.abs(offsets.y) : 0;
+
+      if (corners) {
+        directions.leftup = Math.abs(directions.left + directions.up) / 1.5;
+        directions.leftdown =
+          Math.abs(directions.left + directions.down) / 1.5;
+        directions.rightup = Math.abs(directions.right + directions.up) / 1.5;
+        directions.rightdown =
+          Math.abs(directions.right + directions.down) / 1.5;
+      }
+
+      return directions;
+    }
+
+    static order(directions) {
+      return Object.keys(directions).sort(
+        (a, b) => directions[b] - directions[a]
+      );
+    }
+
+    addEventListener(evt, bc) {
+      const keys = Object.keys(this.events);
+      if (keys.indexOf(evt) !== -1) {
+        this.events[evt].push(bc);
+        const i = this.events.length - 1;
+        return {
+          clear: () => {
+            this.events[i] = undefined;
+          },
+        };
+      } else {
+        throw new Error("Event is not valid, use " + keys.join(", "));
+      }
+    }
+
+    down(e) {
+      var a = e.touches == undefined ? e : e.touches[0];
+      e.preventDefault();
+      this.didDown = true;
+      this.startTime = Date.now();
+      this.startPos = Swipe.position(a);
+    }
+
+    move(e) {
+      e.preventDefault();
+      if (!this.didDown) {
+        return;
+      }
+      this.didSwipe = true;
+      var a = e.touches == undefined ? e : e.touches[0];
+      if (this.events.live.length > 0) {
+        const offsets = Swipe.getOffsets(a, this.startPos);
+        const directions = Swipe.getDirections(offsets, this.corners);
+        const direction = Swipe.order(directions)[0];
+        const distance = directions[direction];
+        this.events.live.forEach((evt) => {
+          if (typeof evt === "function") {
+            evt(direction, distance);
+          }
+        });
+      }
+    }
+
+    up(e) {
+      console.log(e);
+      console.log(this.didSwipe);
+      e.preventDefault();
+      this.didDown = false;
+      if (!this.didSwipe) {
+        return;
+      }
+      this.didSwipe = false;
+      var a = e.changedTouches == undefined ? e : e.changedTouches[0];
+      const elapsedTime = Date.now() - this.startTime;
+      if (elapsedTime <= this.maxTime) {
+        const offsets = Swipe.getOffsets(a, this.startPos);
+        const directions = Swipe.getDirections(offsets, this.corners);
+        const direction = Swipe.order(directions)[0];
+        const distance = directions[direction];
+
+        if (distance >= this.minDistance) {
+          this.events.after.forEach((evt) => {
+            if (typeof evt === "function") {
+              evt(direction, distance);
+            }
+          });
+
+          this.events[direction].forEach((evt) => {
+            if (typeof evt === "function") {
+              evt(distance);
+            }
+          });
+        }
+      }
+    }
+
+    addListeners() {
+      this.elem.addEventListener("touchstart", (e) => this.down(e));
+      this.elem.addEventListener("mousedown", (e) => this.down(e));
+      this.elem.addEventListener("touchmove", (e) => this.move(e));
+      document.addEventListener("mousemove", (e) => this.move(e));
+      this.elem.addEventListener("touchend", (e) => this.up(e));
+      document.addEventListener("mouseup", (e) => this.up(e));
+    }
+  }
+
+  //CODE FOR ANIMATION
+  const slider = document.querySelector(".slideshow-container");
+  const elem = slider.children;
+  const classes = Swipe.directions();
+  function runAnimation(direction) {
+    var futurePosition = 0;
+    for (var i = 0; i <= elem.length - 1; i++) {
+      if (
+        elem[i].classList.contains("leftShow") ||
+        elem[i].classList.contains("rightShow")
+      ) {
+        elem[i].classList.remove.apply(elem[i].classList, [
+          "leftShow",
+          "rightShow",
+          "show",
+        ]);
+        elem[i].classList.remove.apply(elem[i].classList, classes);
+        elem[i].classList.add.apply(elem[i].classList, ["hide"]);
+
+        if (direction === "left") {
+          futurePosition = i + 1;
+          if (i == elem.length - 1) {
+            futurePosition = 0;
+          }
+        }
+
+        if (direction === "right") {
+          futurePosition = i - 1;
+          if (i == 0) {
+            futurePosition = elem.length - 1;
+          }
+        }
+      }
+    }
+
+    if (direction === "left") {
+      //elem[futurePosition].classList.add.apply(elem[futurePosition].classList, ['leftShow']);
+      setTimeout(
+        () =>
+          elem[futurePosition].classList.add.apply(
+            elem[futurePosition].classList,
+            ["leftShow"]
+          ),
+        1
+      );
+      elem[futurePosition].classList.remove.apply(
+        elem[futurePosition].classList,
+        ["hide"]
+      );
+    }
+
+    if (direction === "right") {
+      //elem[futurePosition].classList.add.apply(elem[futurePosition].classList, ['rightShow']);
+      setTimeout(
+        () =>
+          elem[futurePosition].classList.add.apply(
+            elem[futurePosition].classList,
+            ["rightShow"]
+          ),
+        1
+      );
+      elem[futurePosition].classList.remove.apply(
+        elem[futurePosition].classList,
+        ["hide"]
+      );
+    }
+
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    dots[futurePosition].className += " active";
+  }
+
+  //SWIPE INITIALIZATION
+  const swipe = new Swipe(slider, {
+    corners: true,
+    minDistance: 50,
+  });
+  let afterEvent = swipe.addEventListener("after", (direction) => {
+    runAnimation(direction);
+  });
+
+  let liveEvent = swipe.addEventListener("live", (direction) => { });
+
+  //REMOVE EVENT WITH evt.clear();
+
+  var slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides((slideIndex += n));
+  }
+
+  function currentSlide(n) {
+    showSlides((slideIndex = n));
+  }
+
+  function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("main-slides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+    // 전체 none
+    for (var i = 0; i <= elem.length - 1; i++) {
+      elem[i].classList.remove.apply(elem[i].classList, [
+        "leftShow",
+        "rightShow",
+        "show",
+      ]);
+      elem[i].classList.remove.apply(elem[i].classList, classes);
+      elem[i].classList.add.apply(elem[i].classList, ["hide"]);
+    }
+
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    // slideIndex-1 만 block
+    setTimeout(
+      () =>
+        elem[slideIndex - 1].classList.add.apply(
+          elem[slideIndex - 1].classList,
+          ["leftShow"]
+        ),
+      1
+    );
+    elem[slideIndex - 1].classList.remove.apply(
+      elem[slideIndex - 1].classList,
+      ["hide"]
+    );
+    dots[slideIndex - 1].className += " active";
+  }
+
+  let intervalIndex = 2;
+
+  function setIntervalSlide() {
+    currentSlide(intervalIndex);
+    if (intervalIndex == 3) intervalIndex = 0;
+    intervalIndex++;
+  }
+
+  setInterval(setIntervalSlide, 2000);
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var pan = document.getElementsByClassName("panel");
+
+  if (acc[0].classList[1] == "active")
+    pan[0].style.maxHeight = pan[0].scrollHeight + "px";
+
+  for (var i = 0; i < acc.length; i++) {
+    acc[i].onclick = function () {
+      // 클릭이 일어났을 때 기존에 열려 있던 아코디언을 접는다. (1개의 아코디언만 열리게)
+      for (var j = 0; j < acc.length; j++) {
+        // 버튼 상태에 입혀진 active 라는 클래스를 지운다.
+        acc[j].classList.remove("active");
+        // 버튼 다음에 있는 div 콘텐츠 높이를 0으로 만든다. == 아코디언을 접는다.
+        if (this !== acc[j]) {
+          acc[j].nextElementSibling.style.maxHeight = null;
+        }
+      }
+
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        this.classList.remove("active");
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    };
+  }
+</script>
+
+</html>

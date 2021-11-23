@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Html CRUD with Pure JavaScript
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+    <button onclick="newUser()">new</button>
+
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <th>PriceRange</th>
+                    <th>FromPrice</th>
+                    <th>ToPrice</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>PriceRange*</label>
+            <input type="text" name="PriceRange" id="PriceRangeForm">
+        </div>
+        <div>
+            <label>FromPrice</label>
+            <input type="text" name="FromPrice" id="FromPriceForm">
+        </div>
+        <div>
+            <label>ToPrice</label>
+            <input type="text" name="ToPrice" id="ToPriceForm">
+        </div>
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+        $("#userInfo").empty();
+
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/price", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    var tr_obj = document.createElement("tr");
+                    const PriceRange = document.createElement("td");
+                    const FromPrice = document.createElement("td");
+                    const ToPrice = document.createElement("td");
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    Edit.id=i;
+                    PriceRange.textContent = data[i].PriceRange;
+                    FromPrice.textContent = data[i].FromPrice;
+                    ToPrice.textContent = data[i].ToPrice;
+                    // Edit.onclick = 'editUser()';
+                    Edit.innerHTML = `<a onClick="editUser(this.id)">Edit</a>`;
+
+                    Delete.innerHTML = `<a onClick="deleteUser()">Delete</a>`;
+
+                    const userInfo = document.getElementById("userInfo");
+                    tr_obj.appendChild(PriceRange);
+                    tr_obj.appendChild(FromPrice);
+                    tr_obj.appendChild(ToPrice);
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "Ages": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/ages", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if(data.sqlMessage){
+                    alert('상위 테이블을 삭제하세요. \n'+data.sqlMessage);
+                }else{
+                    alert("delete succeseed!");
+                }
+     
+               
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var PriceRange = document.getElementById("PriceRangeForm").value;
+        var FromPrice = document.getElementById("FromPriceForm").value;
+        var ToPrice = document.getElementById("ToPriceForm").value;
+        console.log(PriceRange);
+        console.log(FromPrice);
+        console.log(ToPrice);
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ "PriceRange": PriceRange, "FromPrice": FromPrice, "ToPrice": ToPrice }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/price", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("PriceRangeForm").value = "";
+        document.getElementById("FromPriceForm").value = "";
+        document.getElementById("ToPriceForm").value = "";
+    }
+
+    function fnGoInsert(clicked_id) {
+
+
+      alert(clicked_id);
+
+    }
+</script>
+
+</html>

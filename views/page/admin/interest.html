@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Html CRUD with Pure JavaScript
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+    <button onclick="newUser()">new</button>
+
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <th>Interest</th>
+                    <th>InterestName</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>Interest*</label>
+            <input type="text" name="Interest" id="InterestForm">
+        </div>
+        <div>
+            <label>InterestName</label>
+            <input type="text" name="InterestName" id="InterestNameForm">
+        </div>
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+        $("#userInfo").empty();
+
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/interest", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    var tr_obj = document.createElement("tr");
+                    const Interest = document.createElement("td");
+                    const InterestName = document.createElement("td");
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    Edit.id=i;
+                    Interest.textContent = data[i].Interest;
+                    InterestName.textContent = data[i].InterestName;
+                    // Edit.onclick = 'editUser()';
+                    Edit.innerHTML = `<a onClick="editUser(this.id)">Edit</a>`;
+
+                    Delete.innerHTML = `<a onClick="deleteUser()">Delete</a>`;
+
+                    const userInfo = document.getElementById("userInfo");
+                    tr_obj.appendChild(Interest);
+                    tr_obj.appendChild(InterestName);
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "Ages": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/ages", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if(data.sqlMessage){
+                    alert('상위 테이블을 삭제하세요. \n'+data.sqlMessage);
+                }else{
+                    alert("delete succeseed!");
+                }
+     
+               
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var Interest = document.getElementById("InterestForm").value;
+        var InterestName = document.getElementById("InterestNameForm").value;
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ "Interest": Interest, "InterestName": InterestName }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/interest", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("InterestForm").value = "";
+        document.getElementById("InterestNameForm").value = "";
+    }
+
+    function fnGoInsert(clicked_id) {
+
+
+      alert(clicked_id);
+
+    }
+</script>
+
+</html>

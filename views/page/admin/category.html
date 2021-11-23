@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Html CRUD with Pure JavaScript
+    </title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+    <button onclick="newUser()">new</button>
+
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>CategoryName</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>Category*</label>
+            <input type="text" name="Category" id="CategoryForm">
+        </div>
+        <div>
+            <label>CategoryName</label>
+            <input type="text" name="CategoryName" id="CategoryNameForm">
+        </div>
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+        $("#userInfo").empty();
+
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/category", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    const userInfo = document.getElementById("userInfo");
+                    var tr_obj = document.createElement("tr");
+                    const Category = document.createElement("td");
+                    const CategoryName = document.createElement("td");
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    tr_obj.appendChild(Category);
+                    tr_obj.appendChild(CategoryName);
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+                    Category.textContent = data[i].Category;
+                    CategoryName.textContent = data[i].CategoryName;
+                    // Edit.onclick = 'editUser()';
+                    var params = "category=" + data[i].Category + ",categoryName=" + data[i].CategoryName;
+
+                    Edit.innerHTML = `<a onClick="editUser('category', '` + params + `', '` + data[i].Category + `' )">Edit</a>`;
+                    Delete.innerHTML = `<a onClick="deleteUser('category', '` + data[i].Category + `' )">Delete</a>`;
+
+
+
+
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "Category": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/category", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if (data.sqlMessage) {
+                    alert('상위 테이블을 삭제하세요. \n' + data.sqlMessage);
+                } else {
+                    alert("delete succeseed!");
+                }
+
+
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var Category = document.getElementById("CategoryForm").value;
+        var CategoryName = document.getElementById("CategoryNameForm").value;
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ "Category": Category, "CategoryName": CategoryName }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/Category", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("CategoryForm").value = "";
+        document.getElementById("CategoryNameForm").value = "";
+    }
+    function fnGoInsert(tableName, params, rowId) {
+        window.location.href = "category_edit.html?tableName="+tableName+"&params="+params+"&rowId=" + rowId;
+    }
+</script>
+
+</html>

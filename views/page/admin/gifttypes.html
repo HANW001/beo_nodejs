@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Html CRUD with Pure JavaScript
+    </title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+    <!-- <button onclick="resetUser()">리셋</button> -->
+    <button onclick="getUser()">클릭</button>
+    <button onclick="newUser()">new</button>
+
+    <td>
+        <table>
+            <thead>
+                <tr>
+                    <th>GiftType</th>
+                    <th>GiftTypeName</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody id="userInfo">
+
+            </tbody>
+
+        </table>
+    </td>
+    <form>
+        <div>
+            <label>GiftType*</label>
+            <input type="text" name="GiftType" id="GiftTypeForm">
+        </div>
+        <div>
+            <label>GiftTypeName</label>
+            <input type="text" name="GiftTypeName" id="GiftTypeNameForm">
+        </div>
+    </form>
+    <button onclick="postUser()">add</button>
+</body>
+
+<script>
+    function getUser() {
+        $("#userInfo").empty();
+
+
+        const config = {
+            method: "get"
+        };
+
+        fetch("http:/localhost:5000/admin/gifttypes", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+
+                for (let i = 0; i < data.length; i++) {
+                    const userInfo = document.getElementById("userInfo");
+                    var tr_obj = document.createElement("tr");
+                    const GiftType = document.createElement("td");
+                    const GiftTypeName = document.createElement("td");
+                    const Edit = document.createElement("td");
+                    const Delete = document.createElement("td");
+                    tr_obj.appendChild(GiftType);
+                    tr_obj.appendChild(GiftTypeName);
+                    tr_obj.appendChild(Edit);
+                    tr_obj.appendChild(Delete);
+                    userInfo.appendChild(tr_obj);
+                    GiftType.textContent = data[i].GiftType;
+                    GiftTypeName.textContent = data[i].GiftTypeName;
+                    // Edit.onclick = 'editUser()';
+                    var params = "giftType=" + data[i].GiftType + ",gifttypeName=" + data[i].GiftTypeName;
+
+                    Edit.innerHTML = `<a onClick="editUser('giftType', '` + params + `', '` + data[i].GiftType + `' )">Edit</a>`;
+                    Delete.innerHTML = `<a onClick="deleteUser('giftType', '` + data[i].GiftType + `' )">Delete</a>`;
+                }
+
+            }
+            )
+            .catch(error => console.log(error));
+    }
+
+    function editUser(tableName, params, rowId) {
+        console.log('edit');
+        console.log('tableName:', tableName);
+        console.log('params:', params);
+        console.log('rowId:', rowId);
+        fnGoInsert(tableName, params, rowId);
+    }
+
+    function deleteUser(tableName, rowId) {
+        console.log('Delete');
+        console.log('tableName:', tableName);
+        console.log('rowId:', rowId);
+
+        const config = {
+            method: "delete",
+            body: JSON.stringify({ "GiftType": rowId }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/gifttypes", config)
+            .then(response => response.json())
+            .then(data =>
+            // console.log(data[0].PriceRange)
+            {
+                if (data.sqlMessage) {
+                    alert('상위 테이블을 삭제하세요. \n' + data.sqlMessage);
+                } else {
+                    alert("delete succeseed!");
+                }
+            }
+            )
+            .catch(error => alert(error));
+    }
+
+    function postUser() {
+        var GiftType = document.getElementById("GiftTypeForm").value;
+        var GiftTypeName = document.getElementById("GiftTypeNameForm").value;
+
+        let postData = {
+            method: 'POST',
+            body: JSON.stringify({ "GiftType": GiftType, "GiftTypeName": GiftTypeName }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http:/localhost:5000/admin/gifttypes", postData)
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        resetForm()
+    }
+
+    function resetForm() {
+        document.getElementById("GiftTypeForm").value = "";
+        document.getElementById("GiftTypeNameForm").value = "";
+    }
+
+    function fnGoInsert(tableName, params, rowId) {
+        window.location.href = "gifttypes_edit.html?tableName=" + tableName + "&params=" + params + "&rowId=" + rowId;
+    }
+</script>
+
+</html>
